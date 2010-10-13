@@ -4,6 +4,9 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 if has("autocmd")
     filetype plugin on
     filetype indent on
