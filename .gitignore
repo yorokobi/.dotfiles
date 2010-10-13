@@ -1,2 +1,3 @@
-/.*.swp
+*.swp
+.*.swp
 /vim/tags/*.ctags
