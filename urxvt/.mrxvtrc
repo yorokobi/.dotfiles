@@ -115,17 +115,17 @@ Mrxvt.shading:			60
 # ---------------------------------- FONTS ----------------------------------- #
 #
 Mrxvt.xft:			1
-Mrxvt.xftFont:			Bitstream Vera Sans Mono
+Mrxvt.xftFont:			Monospace
 Mrxvt.xftSize:			8
-Mrxvt.xftAntialias:		1
+#Mrxvt.xftAntialias:		1
 
 # The options below are better set using ~/.fonts.config. Mrxvt will use the
 # defaults passed to the fontconfig library.
 #
 Mrxvt.xftHinting:		1
-# Mrxvt.xftAutoHint:		1
-# Mrxvt.xftGlobalAdvance:	1
-# Mrxvt.xftRGBA:		rgb
+Mrxvt.xftAutoHint:		1
+Mrxvt.xftGlobalAdvance:	1
+Mrxvt.xftRGBA:		rgb
 # Mrxvt.xftslow:		1
 
 # Don't load a multi-char font. This will reduce the line space if your multi
@@ -134,7 +134,7 @@ Mrxvt.xftHinting:		1
 Mrxvt.xftNomFont:		1
 
 # Font to use for tab bar / menus. This need not be mono-spaced ;).
-Mrxvt.xftPFont:			Bitstream Vera Sans
+Mrxvt.xftPFont:			Monospace
 Mrxvt.xftPSize:			8
 
 # Shadow text
@@ -200,7 +200,7 @@ Mrxvt.foreground:		#FFFFFF
 
 # The value of the TERM environment variable. Default is rxvt. If you have
 # trouble, try uncommenting the following line.
-Mrxvt.termName: 		xterm
+Mrxvt.termName: 		xterm-256color
 
 # Default title of each tab.
 Mrxvt.tabTitle:			zsh

@@ -60,6 +60,7 @@ URxvt*visualBell: true
 URxvt*pasteableTabs: true
 URxvt*cursorColor: green
 URxvt*cursorBlink: true
+URxvt*cursorUnderline: true
 URxvt*pointerColor: yellow
 URxvt*mapAlert: true
 URxvt*urgentOnBell: true
