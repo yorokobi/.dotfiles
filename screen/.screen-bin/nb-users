@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#uptime | sed -e "s/.*, *\(.* users\), .*/\1/"
+
+NUM_USERS=`who | wc -l`
+if [ $NUM_USERS -gt 1 ] ; then
+    echo -n "$NUM_USERS users"
+else
+    echo -n "$NUM_USERS user"
+fi

@@ -1,0 +1,3 @@
+#!/bin/bash
+exec xautolock -secure -time 5 -corners ++++ -cornerdelay 3 -cornerredelay 10 -locker "xlock -mode random -mousemotion -remote -nice 19 -modelist nose -fullrandom -neighbors 0 -bg black -fg white -background black -foreground white" &
+#exec xautolock -time 5 -corners ++++ -cornerdelay 3 -cornerredelay 15 -secure -timeout 2 -locker "xlock -mode random -mousemotion -remote -nice 19 -modelist allgl -fullrandom -neighbors 0 -bg black -fg white -background black -foreground white" &

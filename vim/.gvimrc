@@ -1,0 +1,45 @@
+set columns=135
+set lines=50
+
+" set the X11 font to use
+" set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+set guifont=DejaVu\ Sans\ Mono\ 8
+
+" Display bufnr:filetype (dos,unix,mac) in status line
+set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P
+
+" === VERSION 5.00 AND UP SETTINGS ===
+" Only do this for Vim version 5.0 and later.
+if version >= 500
+
+  " Hide the mouse pointer while typing
+  " The window with the mouse pointer does not automatically become the active window
+  " Right mouse button extends selections
+  " Turn on mouse support
+  set mousehide
+  set nomousefocus
+  set mousemodel=extend
+  set mouse=a
+
+  " Show paren matches
+  " For 5 tenths of a second
+  set showmatch
+  set matchtime=5
+
+  " Setup tabs for 4 spaces
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+  set smarttab
+
+" Setup indenting
+  set autoindent
+
+" Nice default colorscheme
+  colorscheme desert256
+
+endif
+
+" === AUTOCMD SETTINGS ===
+"if has("autocmd")
+"endif " has("autocmd")

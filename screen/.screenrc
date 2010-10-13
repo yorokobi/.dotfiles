@@ -1,0 +1,60 @@
+#
+# Screenrc derived from dist
+# modified by cwilliams
+#
+
+# Set TERM = screen-256color-bce
+term screen-256color-bce
+attrcolor b ".I"
+
+# This is how one can set a reattach password:
+# password ODSJQf.4IJN7E    # "1234"
+
+# no annoying audible bell, please
+vbell on
+
+# detach on hangup
+autodetach on
+
+# don't display the copyright page
+startup_message off
+
+# emulate .logout message
+pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
+
+defscrollback 100000
+
+### Enable UTF-8 encoding by default
+defutf8 on
+
+### Change escape chars
+#escape ^``
+
+caption always "%{= Kw}%-w%{= bW}%n %t%{-}%+w"
+
+#80/132 column switching must be enabled for ^AW to work
+#change init sequence to not switch width
+termcapinfo  xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' # AB=background, AF=foreground
+defbce "on" # erase background with current bg color
+
+#screen -t irssi 0 irssi
+#screen -t mutt 1 $HOME/Private/bin/muttw.sh
+
+# hardstatus alwaysignore
+#hardstatus alwayslastline "%Lw"
+hardstatus alwayslastline
+
+#blankerprg rain -d 120
+#idle 600 blanker
+
+#bindkey -d -k kb stuff  "\010"
+
+backtick 104 10 10 /bin/pwd
+backtick 105 5 5 $HOME/.screen-bin/load-average
+backtick 106 10 10 $HOME/.screen-bin/nb-users
+backtick 107 10 10 $HOME/.screen-bin/uptime.pl
+backtick 108 10 10 /bin/hostname -f
+backtick 109 3600 3600 $HOME/.screen-bin/release-short
+backtick 110 3600 3600 $HOME/.screen-bin/ext-ip
+
+hardstatus string '%{kw}Current window:%{+b kR} %t %= %{= km}IP: %110`%{= kW} | ldavg: %{kw}%l%{= kW} | %{kG}%106`%{= kW} | %{+b kR}%107`%{+b gW}%103`%{= kW} | %{= kW}%D %Y-%m-%d %c%<'

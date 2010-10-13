@@ -1,0 +1,9 @@
+#!/bin/sh
+ruptime=$(uptime)
+if $(echo $ruptime | grep -e "day" >/dev/null) ; then
+   x=$(echo $ruptime | egrep "day" | awk '{ print $3 " " $4 " " $5 }' | sed s/,$//)
+else 
+   x=$(echo $ruptime | awk '{ print $3 }' | sed s/,$//)
+fi
+
+echo -n $x

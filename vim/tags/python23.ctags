@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+Debconf	/usr/lib/python2.3/site-packages/debconf.py	/^class Debconf:$/;"	c
+DebconfCommunicator	/usr/lib/python2.3/site-packages/debconf.py	/^class DebconfCommunicator(Debconf, object):$/;"	c
+DebconfError	/usr/lib/python2.3/site-packages/debconf.py	/^class DebconfError(Exception):$/;"	c
+__del__	/usr/lib/python2.3/site-packages/debconf.py	/^    def __del__(self):$/;"	m	class:DebconfCommunicator	file:
+__init__	/usr/lib/python2.3/site-packages/debconf.py	/^    def __init__(self, owner, title=None, cloexec=False):$/;"	m	class:DebconfCommunicator
+__init__	/usr/lib/python2.3/site-packages/debconf.py	/^    def __init__(self, title=None, read=None, write=None):$/;"	m	class:Debconf
+command	/usr/lib/python2.3/site-packages/debconf.py	/^    def command(self, command, *params):$/;"	m	class:Debconf
+forceInput	/usr/lib/python2.3/site-packages/debconf.py	/^    def forceInput(self, priority, question):$/;"	m	class:Debconf
+getBoolean	/usr/lib/python2.3/site-packages/debconf.py	/^    def getBoolean(self, question):$/;"	m	class:Debconf
+getString	/usr/lib/python2.3/site-packages/debconf.py	/^    def getString(self, question):$/;"	m	class:Debconf
+runFrontEnd	/usr/lib/python2.3/site-packages/debconf.py	/^def runFrontEnd():$/;"	f
+setCommand	/usr/lib/python2.3/site-packages/debconf.py	/^    def setCommand(self, command):$/;"	m	class:Debconf
+setUp	/usr/lib/python2.3/site-packages/debconf.py	/^    def setUp(self, title):$/;"	m	class:Debconf
+shutdown	/usr/lib/python2.3/site-packages/debconf.py	/^    def shutdown(self):$/;"	m	class:DebconfCommunicator
+stop	/usr/lib/python2.3/site-packages/debconf.py	/^    def stop(self):$/;"	m	class:Debconf

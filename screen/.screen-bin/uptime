@@ -1,0 +1,3 @@
+#!/bin/sh
+
+uptime | sed -e "s/.* up *\(.*\), *.* users, .*/\1/"

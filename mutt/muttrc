@@ -1,0 +1,102 @@
+source "~/.mutt/muttgpg"
+source "~/.mutt/smime.rc"
+source "~/.mutt/muttcolor256"
+set charset="utf-8"
+message-hook '!(~g|~G) ~b"^-----BEGIN\ PGP\ (SIGNED\ )?MESSAGE"' "exec check-traditional-pgp"
+set sendmail="/usr/sbin/sendmail"
+set tmpdir="/tmp"
+set envelope_from=yes
+set fast_reply=yes
+set smart_wrap
+set edit_headers
+set implicit_autoview=no
+auto_view text/html
+auto_view text/x-vcard
+set query_command="lbdbq '%s'"
+set mailcap_path="~/.mailcap"
+set mailcap_sanitize=yes
+set include=yes
+set mark_old=no
+set move=no
+set beep_new=yes
+set ascii_chars=no
+set narrow_tree=no
+set text_flowed=yes
+set askcc=yes
+#set editor='vim "+set tw=72" +'
+set editor='vim -u ~/.mutt/vimrc +'
+set reverse_name=yes
+set use_from=yes
+set recall=yes
+set sort=threads
+set duplicate_threads=yes
+set strict_threads=yes
+set sort_aux=date
+set sort_alias=alias
+set date_format="!%a %F %R"
+set forward_format="[FWD: %s]"
+set forward_quote=yes
+set indent_string=">"
+set wait_key=no
+set header_cache=.mutt
+### status_chars meanings
+# - unchanged
+# * modified
+# % read-only
+# A attach-message mode
+#set status_chars="-*%A"
+#set status_format="-%r-Mutt (%h): %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?]---(%?l? %l?/%S)-%>-(%P)---%v"
+set status_format="-%r-Mutt: %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)-[%v]-"
+set index_format="%4C %Z %d %-15.15F (%?l?%4l&%4c?) %s"
+#set xterm_title="Mutt %?b?[NEW mail in %b mailboxes]? %f %?m?%m messages&no messages?%?n? [%n NEW]?"
+mime_lookup application/octet-stream
+
+#my_hdr X-PGP-Key: http://205.208.245.93/0x6BE654AD.asc
+unhdr_order *
+#hdr_order From User-Agent: X-Mailer: Date: To: Cc: From: X-PGP-Key: Subject:
+hdr_order From User-Agent: X-Mailer: Date: To: Cc: From: Subject:
+
+set sidebar_width=20
+set sidebar_visible=yes
+set sidebar_delim='|'
+mailboxes Inbox OSSEC
+color sidebar_new yellow default
+bind index \CP sidebar-prev
+bind index \CN sidebar-next
+bind index \CO sidebar-open
+bind pager \CP sidebar-prev
+bind pager \CN sidebar-next
+bind pager \CO sidebar-open
+bind index B bounce-message
+
+attachments		+A */.*
+attachments		+A application/vnd.ms-excel
+attachments		+A application/excel
+attachments		-A text/x-vcard application/pgp.*
+attachments		-A application/x-pkcs7-.*
+
+ignore *
+#unignore date from subject to cc X-Mailer User-Agent X-PGP-Key
+unignore date from subject to cc X-Mailer User-Agent
+
+#macro pager r "<pipe-message>abook --add-email-quiet\n<enter><reply>"
+#macro index a "<shell-escape>abook<enter>"
+
+macro index <F5> ":source ~/.mutt/muttrc\n" "Reload the muttrc"
+macro pager <F5> ":source ~/.mutt/muttrc\n" "Reload the muttrc"
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>' "Toggle sidebar"
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>' "Toggle sidebar"
+macro index h "c?" "Select folder to change to"
+macro index $ "<sync-mailbox><enter>" "Sync mailboxes"
+macro index G "<imap-fetch-mail>" "Fetch mail from IMAP"
+macro index <F2> "s=Archive<enter><enter>$" "Move mail to Archive folder"
+macro pager <F2> "s=Archive<enter><enter>$" "Move mail to Archive folder"
+set mail_check=5
+set timeout=15
+set from=""
+set realname=""
+set spoolfile="~/.mail/Inbox"
+set folder="~/.mail"
+
+set record="~/.mail/Sent"
+set postponed="~/.mail/Drafts"

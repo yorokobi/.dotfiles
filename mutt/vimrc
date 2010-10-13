@@ -1,0 +1,293 @@
+"autocmd BufEnter * :lcd %:p:h
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+set title
+
+set bs=2		        " allow backspacing over everything in insert mode
+"set ai			        " always set autoindenting on
+set nobackup	        " don't keep a backup file
+"set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+			            " than 50 lines of registers
+set history=50		    " keep 50 lines of command line history
+set ruler		        " show the cursor position all the time
+set nowrap              " make sure that long lines don't wrap
+set background=dark     " Make sure we have a nice dark background
+set spell
+"set laststatus=2        " Make sure the status line is always displayed
+filetype plugin on
+
+" Try and enable color for xterms
+if &term =~ 'xterm'
+    if has("terminfo")
+        set t_Co=8
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+    else
+        set t_Co=8
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+endif
+
+" Switch syntax highlighting on
+syntax enable
+set hlsearch
+
+" Make external commands work through a pipe instead of a pseudo-tty
+"set noguipty
+
+" set the X11 font to use
+" set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
+
+" Display bufnr:filetype (dos,unix,mac) in status line
+set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P
+
+" === VERSION 5.00 AND UP SETTINGS ===
+" Only do this for Vim version 5.0 and later.
+if version >= 500
+
+  " Hide the mouse pointer while typing
+  " The window with the mouse pointer does not automatically become the active window
+  " Right mouse button extends selections
+  " Turn on mouse support
+  set mousehide
+  set nomousefocus
+  set mousemodel=extend
+  set mouse=a
+
+  " Show paren matches
+  " For 5 tenths of a second
+  set showmatch
+  set matchtime=5
+
+  " Setup tabs for 4 spaces
+  set tabstop=4
+  set shiftwidth=4
+  set softtabstop=4
+"  set smarttab
+"  set shiftround
+"  set expandtab
+
+  " Setup auto wrapping
+  set textwidth=72
+
+  " Setup indenting
+"  set autoindent
+
+  " Enable wild menus
+"  set wildmenu
+
+  " Nice default colorscheme
+  colorscheme darkocean
+
+  " Working on building nice development environment
+  "map <Leader>v :vsplit<CR>:vertical resize 20<CR>:Explore<CR><C-W>l<C-W>sz1<CR><C-W>j<C-W>h
+
+endif
+
+" === COMMAND MAPPINGS ===
+" DOS to Unix conversion (remove ^M)
+" added mark (m) so we end up where we started
+"noremap <Leader>D mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
+
+" VIM Ascii table
+"noremap <Leader>A :help digraph-table<CR>
+
+" Edit a file in the same directory as the current file
+"noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" Retag the parent of the current folder
+"noremap <Leader>r :!fndtags<CR>
+
+" Map H to stop highlighting search matches
+noremap H :set hlsearch!<CR>
+
+" Make shift-insert work like in Xterm
+noremap <S-Insert> <MiddleMouse>
+noremap! <S-Insert> <MiddleMouse>
+
+" === COMMAND/FOLD MAPPINGS ===
+" Fold Block - anywhere in or on block except closing brace
+"noremap fb j[[zfaB
+
+" Fold Comment - anywhere in or on a block comment
+"noremap fc j[*zf]*
+
+" Fold Mark - Fold to the a mark
+"noremap fm zf'a
+
+" Delete a Fold
+"noremap fd zd
+
+" === INSERT MAPPINGS ===
+" VIM Calculator; type equation in insert mode, 
+" then press <CTRL-A>
+"inoremap \sig Sincerely,<CR><CR><CR>Bindu Wavell <bindu@blissDROP.com><CR>blissDROP Computer Consulting<CR>Tel: 720-436-8146<CR><ESC>ggddOFrom: Bindu Wavell <bindu@blissDROP.com><ESC>
+"inoremap \zsig Sincerely,<CR><CR><CR>Bindu Wavell <bindu@ziaconsulting.com><CR>Zia Consulting<CR>Tel: 720-436-8146<CR><ESC>ggddOFrom: Bindu Wavell <bindu@ziaconsulting.com><ESC>
+"inoremap \fsig Sincerely,<CR><CR><CR>Bindu Wavell <bindu.wavell@flatironssolutions.com><CR>Flatirons Solutions<CR>Tel: 720-436-8146<CR><ESC>ggddOFrom: Bindu Wavell <bindu.wavell@flatironssolutions.com><ESC>
+
+" === NORMAL MAPINGS ===
+" make '<map> goto exact location of map (rather than the
+" beginning of the line where the map is)
+"nnoremap ' `
+
+" make ` execute the contents of the a register 
+"nnoremap ` @a
+
+" allow . to execute once for each line of a visual selection 
+"vnoremap . :normal .<CR>
+
+" allow ` to execute the contents of the a register once 
+" for each line of a visual selection 
+"vnoremap ` :normal @a<CR>
+
+" Make p in Visual mode replace the selected text with the "" register.
+"vnoremap p <Esc>:let current_reg = @"<CR>gvdi<C-R>=current_reg<CR><Esc>
+
+
+
+
+" === PLUGIN SETTINGS ===
+
+" MiniBufExplorer
+"let g:miniBufExplMapWindowNavVim    = 1
+"let g:miniBufExplMapCTabSwitchBufs  = 1
+"let g:miniBufExplorerDebugMode      = 3
+"let g:miniBufExplorerDebugLevel     = 10
+"let g:miniBufExplModSelTarget       = 1
+"let g:proj_flags = "imstg"
+"let g:miniBufExplVSplit             = 20
+"let g:miniBufExplMaxSize            = 30
+"let g:miniBufExplMinSize            = 4
+"let g:miniBufExplTabWrap            = 1
+"let g:miniBufExplSplitBelow         = 1 " below for vert = right
+"let g:miniBufExplSplitToEdge        = 0 " 1 is default
+
+"hi MBENormal         guifg=cyan
+"hi MBEChanged        guifg=red
+"hi MBEVisibleNormal  guibg=darkblue guifg=yellow
+"hi MBEVisibleChanged guibg=red      guifg=yellow
+
+"map <F2> :BufExplorer<CR>
+
+"set hidden
+
+" TagList
+"if has("win32")
+"    let Tlist_Ctags_Cmd = 'C:\\bin\\ctags531\\ctags.exe'
+"endif
+"let Tlist_Use_SingleClick = 1
+
+
+
+" === AUTOCMD SETTINGS ===
+" Only do this part when compiled with support for autocommands.
+"if has("autocmd")
+"
+" " In text files, always limit the width of text to 78 characters
+" autocmd BufRead *.txt set tw=78
+"
+" augroup cprog
+"  " Remove all cprog autocommands
+"  au!
+"
+"  " When starting to edit a file:
+"  "   For C and C++ files set formatting of comments and set C-indenting on.
+"  "   For other files switch it off.
+"  "   Don't change the order, it's important that the line with * comes first.
+"  autocmd FileType *      set formatoptions=tcql nocindent comments&
+"  autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,://
+"  autocmd FileType java   set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,://
+"
+"  set tags=./tags,../tags,../../tags,../../../tags,../../../../tags
+" augroup END
+"
+" augroup gzip
+"  " Remove all gzip autocommands
+"  au!
+"
+"  " Enable editing of gzipped files
+"  " set binary mode before reading the file
+"  " use "gzip -d", gunzip isn't always available
+"  autocmd BufReadPre,FileReadPre	*.gz,*.bz2 set bin
+"  autocmd BufReadPost,FileReadPost	*.gz call GZIP_read("gzip -d")
+"  autocmd BufReadPost,FileReadPost	*.bz2 call GZIP_read("bzip2 -d")
+"  autocmd BufWritePost,FileWritePost	*.gz call GZIP_write("gzip")
+"  autocmd BufWritePost,FileWritePost	*.bz2 call GZIP_write("bzip2")
+"  autocmd FileAppendPre			*.gz call GZIP_appre("gzip -d")
+"  autocmd FileAppendPre			*.bz2 call GZIP_appre("bzip2 -d")
+"  autocmd FileAppendPost		*.gz call GZIP_write("gzip")
+"  autocmd FileAppendPost		*.bz2 call GZIP_write("bzip2")
+"
+"  " After reading compressed file: Uncompress text in buffer with "cmd"
+"  fun! GZIP_read(cmd)
+"    " set 'cmdheight' to two, to avoid the hit-return prompt
+"    let ch_save = &ch
+"    set ch=3
+"    " when filtering the whole buffer, it will become empty
+"    let empty = line("'[") == 1 && line("']") == line("$")
+"    let tmp = tempname()
+"    let tmpe = tmp . "." . expand("<afile>:e")
+"    " write the just read lines to a temp file "'[,']w tmp.gz"
+"    execute "'[,']w " . tmpe
+"    " uncompress the temp file: call system("gzip -d tmp.gz")
+"    call system(a:cmd . " " . tmpe)
+"    " delete the compressed lines
+"    '[,']d
+"    " read in the uncompressed lines "'[-1r tmp"
+"    set nobin
+"    execute "'[-1r " . tmp
+"    " if buffer became empty, delete trailing blank line
+"    if empty
+"      normal Gdd''
+"    endif
+"    " delete the temp file
+"    call delete(tmp)
+"    let &ch = ch_save
+"    " When uncompressed the whole buffer, do autocommands
+"    if empty
+"      execute ":doautocmd BufReadPost " . expand("%:r")
+"    endif
+"  endfun
+"
+"  " After writing compressed file: Compress written file with "cmd"
+"  fun! GZIP_write(cmd)
+"    if rename(expand("<afile>"), expand("<afile>:r")) == 0
+"      call system(a:cmd . " " . expand("<afile>:r"))
+"    endif
+"  endfun
+"
+"  " Before appending to compressed file: Uncompress file with "cmd"
+"  fun! GZIP_appre(cmd)
+"    call system(a:cmd . " " . expand("<afile>"))
+"    call rename(expand("<afile>:r"), expand("<afile>"))
+"  endfun
+"
+" augroup END
+"
+" " Automatically save view information about each file that is edited
+" " and restore the settings (persists between VIM invocations.)
+" au BufWinLeave *.c,*.cpp,*.h mkview
+" au BufWinEnter *.c,*.cpp,*.h silent loadview
+"
+"endif " has("autocmd")
+map <F4> :set number! <cr>
+"map <F5> :set nonumber <cr>
+"set foldmethod=marker
+"set wmh=0
+"map <C-J> <C-W>j<C-W>_
+"map <C-K> <C-W>k<C-W>_
+"let loaded_minibufexplorer=1
+"set noequalalways
+"
+"" macros
+"nmap <F5> @a
+"nmap <F6> @b
+"nmap <F7> @c
+"nmap <F8> @d
+"set dir=~/.vim/swap
+"set nobackup writebackup
+

@@ -1,0 +1,40 @@
+PATH=/bin:/usr/bin
+LOGNAME=`id -un`
+HOME=/home/${LOGNAME}
+VERBOSE=yes
+MAILDIR=${HOME}/.mail
+#ORGMAIL=/var/mail/$LOGNAME
+#DEFAULT=${HOME}/Private/Mail/Inbox
+LOGFILE=${HOME}/.mail/procmail.log
+SHELL=/bin/bash
+
+#:0
+#* ^Subject:.*SomeThing\ Unique
+#/dev/null
+#
+#:0
+#* ^From:.*someone@example.com
+#/dev/null
+#
+#:0
+#* ^To:.*someone@example.com
+#/dev/null
+#
+#:0:
+#* ^message-id=.*somethingUnique
+#DestinationFolder
+#
+#:0:
+#* ^Received:.*from\ someone@example.com
+#DestinationFolder
+
+#:0hc
+#| lbdb-fetchaddr
+#
+
+:0:
+* ^From:.*ossecm@cw-arch64
+OSSEC
+
+:0 w
+Inbox

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+lsb_release -i -c -s | tr "\n" " "

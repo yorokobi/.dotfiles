@@ -1,0 +1,90 @@
+Xlock.mousemotion: on
+Xautolock.time: 1
+Xautolock.cornersize: 10
+Xautolock.corners: ++++
+Xautolock.cornerdelay: 3
+Xautolock.cornerredelay: 15
+Xautolock.noclose: true
+Xautolock.locker: "xlock -mode random -mousemotion -remote -nice 19 -modelist nose -fullrandom -neighbors 0 -bg black -fg white -background black -foreground white"
+
+! Xft settings -------- Taken from http://wiki.archlinux.org/index.php/Xdefaults
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+! terminal colors ----- also taken from Arch Wiki
+
+! tangoesque scheme
+XTerm*background: #000000
+XTerm*foreground: #ffffff
+! Black (not tango) + DarkGrey
+XTerm*color0:  #000000
+XTerm*color8:  #555753
+! DarkRed + Red
+XTerm*color1:  #ff6565
+XTerm*color9:  #ff8d8d
+! DarkGreen + Green
+XTerm*color2:  #93d44f
+XTerm*color10: #c8e7a8
+! DarkYellow + Yellow
+XTerm*color3:  #eab93d
+XTerm*color11: #ffc123
+! DarkBlue + Blue
+XTerm*color4:  #204a87
+XTerm*color12: #3465a4
+! DarkMangenta + Mangenta
+XTerm*color5:  #ce5c00
+XTerm*color13: #f57900
+!DarkCyan + Cyan (both not tango)
+XTerm*color6:  #89b6e2
+XTerm*color14: #46a4ff
+! LightGrey + White
+XTerm*color7:  #cccccc
+XTerm*color15: #ffffff
+
+URxvt*depth: 32
+URxvt*background: rgba:0001/0001/0001/bbbb
+URxvt*foreground: white
+URxvt*transparent: true
+URxvt*shading: 60
+URxvt*fading: 40
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:autohint=true
+URxvt*italicFont: xft:DejaVu Sans Mono:italic:pixelsize=12:autohint=true
+URxvt*boldItalicFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true
+URxvt*scrollBar: off
+URxvt*geometry: 120x40
+URxvt*scrollstyle: plain
+URxvt*visualBell: true
+URxvt*pasteableTabs: true
+URxvt*cursorColor: green
+URxvt*cursorBlink: true
+URxvt*pointerColor: yellow
+URxvt*mapAlert: true
+URxvt*urgentOnBell: true
+!URxvt*borderColor: blue
+!URxvt*internalBorder: 1
+!URxvt*externalBorder: 0
+! urlLauncher settings ----- Taken from http://wiki.archlinux.org/index.php/Xdefaults
+URxvt*perl-lib:           /usr/lib/urxvt/perl/
+URxvt*perl-ext-common:    default,matcher,xim-onthespot,selection-pastebin
+URxvt*urlLauncher:        /usr/bin/firefox
+URxvt*matcher.button:     1
+! urxvt tab colors
+URxvt.tabbed.tabbar-fg: 4
+URxvt.tabbed.tabbar-bg: 8
+URxvt.tabbed.tab-fg: 14
+URxvt.tabbed.tab-bg: 8
+! Enable iBus/SCIM support
+URxvt*inputMethod: ibus
+URxvt*preeditType: OnTheSpot,None
+URxvt*imLocale: ja_JP.UTF-8
+
+!ROOT*background: rgba:2222/1111/1111/eeee
+!ROOT*borderColor: red
+!ROOT*internalBorder: 8
+!ROOT*geometry:120x48
+!ROOT*font: xft:Monospace:pixelsize=12:autohint=true
+
+CSSH*geometry: 80x25

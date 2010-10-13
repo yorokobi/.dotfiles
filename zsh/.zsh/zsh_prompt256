@@ -1,0 +1,32 @@
+setopt extended_glob
+
+preexec () {
+    if [[ "$TERM" == "screen" ]]; then
+	local CMD=${1[(wr)^(*=*|sudo|-*)]}
+	echo -n "\ek$CMD\e\\"
+    fi
+}
+
+
+setprompt () {
+###
+# Need this so the prompt will work.
+
+setopt prompt_subst
+
+###
+# see if we can use colors.
+
+autoload colors zsh/terminfo
+
+
+if [[ $UID == 0 ]] ; then
+    #PROMPT='[%{$fg_bold[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%y] %{$fg_bold[yellow]%}%~%{$reset_color%} %# '
+    PROMPT='[%B%F{red}%n%f%b@%F{magenta}%m%f:%y] %B%F{yellow}%~%f%b %# '
+else
+    #PROMPT='[%{$fg[green]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%y] %{$fg_bold[yellow]%}%~%{$reset_color%} %# '
+    PROMPT='[%F{033}%n%f@%F{magenta}%m%f:%y] %B%F{yellow}%~%f%b %# '
+fi
+}
+
+setprompt

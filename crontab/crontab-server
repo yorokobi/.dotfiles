@@ -1,0 +1,10 @@
+# MIN HOUR DAY MONTH DAYOFWEEK  COMMAND
+
+# Recreate the Perl and Python ctags every month
+0 4 1 * * ~/Private/bin/makectags.sh
+
+# start mpd
+@reboot /usr/bin/mpd ~/.mpd/mpd.conf
+
+# check WHOIS for novelreaction and email results
+0 2 * * * ~/Private/bin/checkWhois.sh

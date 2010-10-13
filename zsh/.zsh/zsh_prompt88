@@ -1,0 +1,23 @@
+setopt extended_glob
+
+preexec () {
+    if [[ "$TERM" == "screen" ]]; then
+	local CMD=${1[(wr)^(*=*|sudo|-*)]}
+	echo -n "\ek$CMD\e\\"
+    fi
+}
+
+
+setprompt () {
+###
+# Need this so the prompt will work.
+setopt prompt_subst
+
+if [[ $UID == 0 ]] ; then
+    PROMPT='[%B%F{red}%n%f%b@%F{magenta}%m%f:%y] %B%F{yellow}%~%f%b %# '
+else
+    PROMPT='[%F{cyan}%n%f@%F{magenta}%m%f:%y] %F{green}%~%f %# '
+fi
+}
+
+setprompt
