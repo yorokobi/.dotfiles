@@ -73,8 +73,58 @@ zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.old'
 zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*:*:*:users' ignored-patterns adm apache bin daemon games gdm halt ident junkbust lp mail mailnull named news nfsnobody nobody nscd ntp operator pcap postgres radvd rpc rpcuser rpm shutdown squid sshd sync uucp vcsa xfs avahi-autoipd avahi backup messagebus beagleindex debian-tor dhcp dnsmasq fetchmail firebird gnats haldaemon hplip irc klog list man cupsys postfix proxy syslog www-data mldonkey sys snort
 # SSH Completion
-zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP=ddress *'
-zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
-zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IPddress *'
-zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+#zstyle ':completion:*:scp:*' tag-order files users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP=ddress *'
+#zstyle ':completion:*:scp:*' group-order files all-files users hosts-domain hosts-host hosts-ipaddr
+#zstyle ':completion:*:ssh:*' tag-order users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IPddress *'
+#zstyle ':completion:*:ssh:*' group-order hosts-domain hosts-host users hosts-ipaddr
+# ssh, scp, ping, host
+test ! -d "$HOME/.ssh" && mkdir "$HOME/.ssh"
+test ! -f "$HOME/.ssh/known_hosts" && touch "$HOME/.ssh/known_hosts"
+test ! -f "$HOME/.ssh/config" && touch "$HOME/.ssh/config"
+ 
+zstyle ':completion:*:(scp|rsync):*' tag-order \
+        'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
+zstyle ':completion:*:(scp|rsync):*' group-order \
+        users files all-files hosts-domain hosts-host hosts-ipaddr
+zstyle ':completion:*:ssh:*' tag-order \
+        users 'hosts:-host hosts:-domain:domain hosts:-ipaddr:IP\ address *'
+zstyle ':completion:*:ssh:*' group-order \
+        hosts-domain hosts-host users hosts-ipaddr
+ 
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-host' ignored-patterns \
+        '*.*' loopback localhost
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-domain' ignored-patterns \
+        '<->.<->.<->.<->' '^*.*' '*@*'
+zstyle ':completion:*:(ssh|scp|rsync):*:hosts-ipaddr' ignored-patterns \
+        '^<->.<->.<->.<->' '127.0.0.<->'
+zstyle ':completion:*:(ssh|scp|rsync):*:users' ignored-patterns \
+        adm bin daemon halt lp named shutdown sync
+ 
+zstyle -e ':completion:*:(ssh|scp|ping|host|nmap|rsync):*' hosts 'reply=(
+        ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) \
+                        /dev/null)"}%%[#| ]*}//,/ }
+        ${=${(f)"$(cat /etc/hosts(|)(N) <<(ypcat hosts 2>/dev/null))"}%%\#*}
+        ${=${${${${(@M)${(f)"$(<~/.ssh/config)"}:#Host *}#Host }:#*\**}:#*\?*}}
+        )'
+
+# history
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+ 
+zstyle ':completion:*:descriptions' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d (errors: %e)%}'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format $'%{\e[0;31m%}No matches for:%{\e[0m%} %d'
+zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*' format 'completing %d'
+zstyle ':completion:*' format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' verbose true
+
+# completion for sudo
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                              /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+
 zstyle '*' single-ignored show
