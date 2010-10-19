@@ -24,7 +24,7 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
             source $HOME/.dircolors256
         fi
         ### enable colors in gnome-terminal
-        if [ $COLORTERM = "gnome-terminal" ] ; then
+        if [[ $COLORTERM = "gnome-terminal" ]] ; then
             export TERM="screen-256color"
             fi
         ### 256 color theme
