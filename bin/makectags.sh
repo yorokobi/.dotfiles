@@ -19,6 +19,8 @@
 #       CREATED:  2010-05-14 05:39:09 -0700
 #      REVISION:  2010-06-15 10:07:13 -0700
 #                   Added author info, copyright, and license
+#                 2010-10-20 20:19:32 -0700
+#                   Changed Python 2.6 to 2.7, added Python 3.1
 #===============================================================================
 
 set -o nounset  # Treat unset variables as an error
@@ -28,7 +30,10 @@ if [ -e /usr/bin/ctags ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/perl5.ctags /usr/lib/perl5 2> /dev/null
     fi
     if [ -d "/usr/lib/python2.6" ] ; then
-        /usr/bin/ctags -R -f $HOME/.vim/tags/python26.ctags /usr/lib/python2.6 2> /dev/null
+        /usr/bin/ctags -R -f $HOME/.vim/tags/python27.ctags /usr/lib/python2.7 2> /dev/null
+    fi
+    if [ -d "/usr/lib/python3.1" ] ; then
+        /usr/bin/ctags -R -f $HOME/.vim/tags/python31.ctags /usr/lib/python3.1 2> /dev/null
     fi
     if [ -d /usr/lib/php ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/php.ctags /usr/lib/php 2> /dev/null
