@@ -50,9 +50,11 @@ URxvt*foreground: white
 URxvt*transparent: true
 URxvt*shading: 60
 URxvt*fading: 40
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:autohint=true
-URxvt*italicFont: xft:DejaVu Sans Mono:italic:pixelsize=12:autohint=true
-URxvt*boldItalicFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true
+URxvt*iconFile: /usr/share/pixmaps/rxvt-unicode.png
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
+URxvt*boldFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
+URxvt*italicFont: xft:DejaVu Sans Mono:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
+URxvt*boldItalicFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
 URxvt*scrollBar: off
 URxvt*geometry: 120x40
 URxvt*scrollstyle: plain
