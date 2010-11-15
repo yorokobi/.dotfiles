@@ -52,7 +52,7 @@ URxvt*shading: 60
 URxvt*fading: 40
 URxvt*iconFile: /usr/share/pixmaps/rxvt-unicode.png
 URxvt*font: xft:DejaVu Sans Mono:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
-URxvt*boldFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
+URxvt*boldFont: xft:DejaVu Sans Mono:bold:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
 URxvt*italicFont: xft:DejaVu Sans Mono:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
 URxvt*boldItalicFont: xft:DejaVu Sans Mono:bold:italic:pixelsize=12:autohint=true,[codeset=JISX0208]xft:Togoshi Mincho:antialias=false
 URxvt*scrollBar: off
