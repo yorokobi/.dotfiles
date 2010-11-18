@@ -17,8 +17,10 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.py set ai
     autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
     inoremap <Nul> <C-x><C-o>
-    set tags+=~/.vim/tags/python26.ctags
+    set tags+=~/.vim/tags/python27.ctags
+    set tags+=~/.vim/tags/python31.ctags
     set tags+=~/.vim/tags/perl5.ctags
+    set tags+=~/.vim/tags/php.ctags
     let g:ctags_statusline=1
 
 endif
@@ -75,6 +77,15 @@ set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P
 if version >= 500
 
     set notitle
+
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=4
+    set smartcase
+    set number
+    set noequalalways
+    set smartindent
+"    set backspace=indent,start
     
     set bs=2		        " allow backspacing over everything in insert mode
     set ai			        " always set autoindenting on

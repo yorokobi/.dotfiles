@@ -10,3 +10,6 @@
 [submodule "vim/bundle/python"]
 	path = vim/bundle/python
 	url = http://github.com/vim-scripts/python.vim.git
+[submodule "vim/bundle/pyflakes"]
+	path = vim/bundle/pyflakes
+	url = https://github.com/kevinw/pyflakes-vim.git
