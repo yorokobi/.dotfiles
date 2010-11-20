@@ -99,6 +99,8 @@ if version >= 500
     			            " than 50 lines of registers
     set history=50		    " keep 50 lines of command line history
     set ruler		        " show the cursor position all the time
+    set cursorline          " highlight the line the cursor is on
+    set cursorcolumn        " highlight the column the cursor is on
     "set nowrap              " make sure that long lines don't wrap
     set wrap
     set background=dark     " Make sure we have a nice dark background
