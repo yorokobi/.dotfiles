@@ -21,6 +21,8 @@
 #                   Added author info, copyright, and license
 #                 2010-10-20 20:19:32 -0700
 #                   Changed Python 2.6 to 2.7, added Python 3.1
+#                 2010-12-10 19:52:22 -0700
+#                   Corrected test for location of Python 2.7 libraries
 #===============================================================================
 
 set -o nounset  # Treat unset variables as an error
@@ -29,7 +31,7 @@ if [ -e /usr/bin/ctags ] ; then
     if [ -d /usr/lib/perl5 ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/perl5.ctags /usr/lib/perl5 2> /dev/null
     fi
-    if [ -d "/usr/lib/python2.6" ] ; then
+    if [ -d "/usr/lib/python2.7" ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/python27.ctags /usr/lib/python2.7 2> /dev/null
     fi
     if [ -d "/usr/lib/python3.1" ] ; then
