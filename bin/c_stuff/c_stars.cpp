@@ -1,12 +1,13 @@
-/****************************************************************************
- *  Written by Colby Williams;  02/10/95                                    *
- *  Copyright (c) 1995 Colby Williams                                       *
- *  Adapted from an example in Teach Yourself C++ in 24 Hours               *
- *  Printed by Sams Publishing                                              *
- ****************************************************************************/
+// {{{ C O P Y R I G H T
+// ============================================================================
+// =  Written by Colby Williams;  02/10/95                                    =
+// =  Copyright (c) 1995 Colby Williams                                       =
+// =  Adapted from an example in Teach Yourself C++ in 24 Hours               =
+// =  Printed by Sams Publishing                                              =
+// ============================================================================
+// }}}
 
-// ==========================================================================
-//  I N C L U D E S                                                         =
+// {{{ I N C L U D E S 
 // ==========================================================================
 
 #include <dos.h>      // for MK_FP(), geninterrupt(), etc.
@@ -14,9 +15,9 @@
 #include <conio.h>    // for kbhit() and getch()
 #include <stdlib.h>   // for randomize(), random() et.al.
 #include <string.h>   // for strlen()
+// }}}
 
-// ==========================================================================
-//  P R E P R O C E S S O R    D E F I N I T I O N S                        =
+// {{{ P R E P R O C E S S O R    D E F I N I T I O N S
 // ==========================================================================
 
 #define INT10           0x10 // INT 10h
@@ -25,9 +26,9 @@
 #define C1              8    // Color of bottom layer
 #define C2              7    // Color of middle layer
 #define C3              15   // Color of top layer
+// }}}
 
-// ==========================================================================
-//  P R O T O T Y P E S                                                     =
+// {{{ P R O T O T Y P E S
 // ==========================================================================
 
 void setgmode(int mode);                // Sets graphics mode
@@ -36,9 +37,9 @@ void c_ppixel(int x, int y, int colr);  // Puts a pixel at (x,y) with colr
 void star_field(void);                  // The actual work of the program
 void c_puts(const char *);              // puts out fast semi-formatted strings
 void printhelp(void);                   // prints out the command-line help
+// }}}
 
-// ==========================================================================
-//  T s t a r   S T R U C T U R E   D E C L A R A T I O N                   =
+// {{{ T S T A R   S T R U C T U R E   D E C L A R A T I O N
 // ==========================================================================
 
 typedef struct Tstar        // Structure of Star
@@ -47,9 +48,9 @@ typedef struct Tstar        // Structure of Star
   int len;                  // Length of the Star (in pixels)
   int colr;                 // Color of the Star
 };
+// }}}
 
-// ==========================================================================
-//  V A R I A B L E   D E C L A R A T I O N S                               =
+// {{{  V A R I A B L E   D E C L A R A T I O N S
 // ==========================================================================
 
 struct Tstar stars[NUM_STARS];          // Variable array of Tstar
@@ -61,9 +62,9 @@ unsigned long int star_num = NUM_STARS; // set stars to default
 unsigned int c1 = C1;                   // set layer 1 to default
 unsigned int c2 = C2;                   // set layer 2 to default
 unsigned int c3 = C3;                   // set layer 3 to default
+// }}}
 
-// ==========================================================================
-//  M A I N   F U N C T I O N                                               =
+// {{{ M A I N   F U N C T I O N
 // ==========================================================================
 
 void main(int argc, char *argv[])
@@ -182,8 +183,9 @@ void main(int argc, char *argv[])
     c_puts("Written by Colby Williams;  02/10/95~");
     c_puts("Copyright (c) 1995 Colby Williams~");
 }
+// }}}
 
-// ==========================================================================
+// {{{ S E T G M O D E   F U N C T I O N
 // ==========================================================================
 
 void setgmode(int mode)
@@ -192,8 +194,9 @@ void setgmode(int mode)
     _AL = mode;           // mov al,mode
     geninterrupt(INT10);  // int 10h
 }
+// }}}
 
-// ==========================================================================
+// {{{ C H E C K V I D M O D E   F U N C T I O N
 // ==========================================================================
 
 int checkvidmode(void)
@@ -221,16 +224,18 @@ int checkvidmode(void)
     }
     return 0;
 }
+// }}}
 
-// ==========================================================================
+// {{{ C _ P P I X E L   F U N C T I O N
 // ==========================================================================
 
 void c_ppixel(int x, int y, int colr)
 { // puts a pixel at coordinates (x,y) with colr
     vid_mem[y*320+x] = colr;  //  set pixel position the fast way
 }
+// }}}
 
-// ==========================================================================
+// {{{ S T A R _ F I E L D   F U N C T I O N
 // ==========================================================================
 
 void star_field(void)
@@ -283,8 +288,9 @@ void star_field(void)
         } // End for ()
     } // End else ()
 } // End star_field()
+// }}}
 
-// ==========================================================================
+// {{{C _ P U T S   F U N C T I O N
 // ==========================================================================
 
 void c_puts(const char *str)
@@ -309,8 +315,9 @@ void c_puts(const char *str)
         }
     }
 }
+// }}}
 
-// ==========================================================================
+// {{{ P R I N T H E L P   F U N C T I O N
 // ==========================================================================
 
 void printhelp(void)
@@ -326,7 +333,7 @@ void printhelp(void)
     c_puts("~~Example:~     c_stars /d2 /s100 /b8 /m7 /t15~");
     exit(254);
 }
+// }}}
 
-// ==========================================================================
-//  E N D   O F   F I L E                                                   =
-// ==========================================================================
+//  E N D   O F   F I L E 
+// vim: foldmethod=marker
