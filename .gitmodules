@@ -4,9 +4,6 @@
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
 	url = http://github.com/tpope/vim-pathogen.git
-[submodule "vim/colors/zenburn"]
-	path = vim/colors/zenburn
-	url = http://github.com/vim-scripts/Zenburn.git
 [submodule "vim/bundle/python"]
 	path = vim/bundle/python
 	url = http://github.com/vim-scripts/python.vim.git
