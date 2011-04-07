@@ -35,13 +35,9 @@ import vim
 for p in sys.path:
     if os.path.isdir(p):
         vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
-EOF
-
-python << EOL
-import vim
 def EvaluateCurrentRange():
     eval(compile('\n'.join(vim.current.range),'','exec'),globals())
-EOL
+EOF
 
 map <C-h> :py EvaluateCurrentRange()
 
@@ -102,8 +98,6 @@ if version >= 500
     set ai			        " always set autoindenting on
     set et					" Use spaces instead of tab when <TAB> is pressed
     set sta					" Split the window for the found tag
-    set sts=4				" Split the window for the selected tag
-    set ts=8				" List the tags that match using info. in the tag file(s)
     "set tw=78				" Auto wrap text at 78 chars
     set nobackup	        " don't keep a backup file
     "set viminfo='20,\"50	" read/write a .viminfo file, don't store more
@@ -131,14 +125,8 @@ if version >= 500
     set showmatch
     set matchtime=5
 
-    " Setup tabs for 4 spaces
-    set tabstop=4
-    set shiftwidth=4
-    set softtabstop=4
-
     " Nice default colorscheme
     colorscheme blackboard
-    "colorscheme xoria256
 
     " Working on building nice development environment
     "map <Leader>v :vsplit<CR>:vertical resize 20<CR>:Explore<CR><C-W>l<C-W>sz1<CR><C-W>j<C-W>h
