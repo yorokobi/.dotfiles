@@ -125,8 +125,17 @@ if version >= 500
     set showmatch
     set matchtime=5
 
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans=0
+    let g:solarized_degrade=0
+    let g:solarized_bold=1
+    let g:solarized_underline=1
+    let g:solarized_italic=1
+    let g:solarized_style="dark"
+    let g:solarized_contrast="normal"
+
     " Nice default colorscheme
-    colorscheme blackboard
+    colorscheme solarized
 
     " Working on building nice development environment
     "map <Leader>v :vsplit<CR>:vertical resize 20<CR>:Explore<CR><C-W>l<C-W>sz1<CR><C-W>j<C-W>h
