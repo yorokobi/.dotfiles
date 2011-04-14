@@ -1,18 +1,23 @@
 autoload -Uz vcs_info
 
-zstyle ':vcs_info:*' stagedstr '%F{88}●%f'
-zstyle ':vcs_info:*' unstagedstr '%F{112}●%f'
+zstyle ':vcs_info:*' stagedstr ' %F{88}●%f'
+zstyle ':vcs_info:*' unstagedstr ' %F{112}●%f'
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{35}:%F{112}%r'
-zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' enable git cvs
 precmd () {
     if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
         zstyle ':vcs_info:*' formats '[%F{22}%b%c%u%f]'
     } else {
-    zstyle ':vcs_info:*' formats '[%F{22}%b%c%u%F{88}●%f]'
+    zstyle ':vcs_info:*' formats '[%F{22}%b%c%u %F{88}●%f]'
     }
 vcs_info
 }
 setopt prompt_subst
 
-PROMPT='[%F{026}%n%f@%B%F{243}%m%f%b${vcs_info_msg_0_}%F{27}%(?/%F{27}/%F{88})%{$reset_color%}:%y] %B%F{120}%~%f%b %# '
+#PROMPT='[%F{026}%n%f@%B%F{243}%m%f%b${vcs_info_msg_0_}%F{27}%(?/%F{27}/%F{88})%{$reset_color%}:%y] %B%F{120}%~%f%b %# '
+if [[ $UID == 0 ]] ; then
+    PROMPT='[%B%F{red}%n%f%b@%F{243}%m%f:%y] %B%F{yellow}%~%f%b %# '
+else
+    PROMPT='[%F{026}%n%f@%F{243}%m%f%b${vcs_info_msg_0_}%F{27}%(?/%F{27}/%F{88})%{$reset_color%}:%y] %B%F{083}%~%f%b %# '
+fi
