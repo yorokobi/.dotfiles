@@ -1,3 +1,4 @@
 *.swp
 .*.swp
 *.ctags
+/zsh/.zsh/cache
