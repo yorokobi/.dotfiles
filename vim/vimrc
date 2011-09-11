@@ -20,7 +20,7 @@ if has("autocmd")
     autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
     inoremap <Nul> <C-x><C-o>
     set tags+=$HOME/.vim/tags/python27.ctags
-    set tags+=$HOME/.vim/tags/python31.ctags
+    set tags+=$HOME/.vim/tags/python32.ctags
     set tags+=$HOME/.vim/tags/perl5.ctags
     set tags+=$HOME/.vim/tags/php.ctags
     let g:ctags_statusline=1
