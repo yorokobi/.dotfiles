@@ -35,7 +35,7 @@ if [ -e /usr/bin/ctags ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/python27.ctags /usr/lib/python2.7 2> /dev/null
     fi
     if [ -d "/usr/lib/python3.1" ] ; then
-        /usr/bin/ctags -R -f $HOME/.vim/tags/python31.ctags /usr/lib/python3.1 2> /dev/null
+        /usr/bin/ctags -R -f $HOME/.vim/tags/python32.ctags /usr/lib/python3.2 2> /dev/null
     fi
     if [ -d /usr/lib/php ] ; then
         /usr/bin/ctags -R -f $HOME/.vim/tags/php.ctags /usr/lib/php 2> /dev/null
