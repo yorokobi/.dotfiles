@@ -13,7 +13,7 @@ if has("autocmd")
 
     autocmd FileType python set omnifunc=pythoncomplete#Complete
     " Some additions from http://wiki.python.org/moin/Vim
-    autocmd BufRead,BufNewFile *.py syntax on
+    "autocmd BufRead,BufNewFile *.py syntax on
     autocmd BufRead,BufNewFile *.py set ai
     autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
     autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
@@ -72,7 +72,7 @@ if &term =~ '-256color'
 endif
 
 " Switch syntax highlighting on
-syntax enable
+syntax on
 set hlsearch
 set modeline
 
