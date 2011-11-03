@@ -15,7 +15,7 @@ if has("autocmd")
     " Some additions from http://wiki.python.org/moin/Vim
     "autocmd BufRead,BufNewFile *.py syntax on
     autocmd BufRead,BufNewFile *.py set ai
-    autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
+    autocmd BufRead *.py set cindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
     autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
     autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
     inoremap <Nul> <C-x><C-o>
@@ -85,13 +85,13 @@ if version >= 500
 
     set notitle
 
-    set tabstop=4
+    set expandtab
     set softtabstop=4
     set shiftwidth=4
     set smartcase
     set number
     set noequalalways
-    set smartindent
+    "set smartindent
 "    set backspace=indent,start
     
     set bs=2		        " allow backspacing over everything in insert mode

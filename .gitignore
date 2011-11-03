@@ -2,3 +2,4 @@
 .*.swp
 *.ctags
 /zsh/.zsh/cache
+/vim/.netrwhist
