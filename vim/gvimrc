@@ -37,7 +37,9 @@ if version >= 500
 
 " Nice default colorscheme
   "colorscheme desert256
-  colorscheme xoria256
+  colorscheme solarized
+  set background=dark
+  syntax on
 
 endif
 
