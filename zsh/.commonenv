@@ -26,15 +26,15 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         ### enable colors in gnome-terminal
         if [[ $COLORTERM = "gnome-terminal" ]] ; then
             export TERM="screen-256color"
-            fi
+        fi
         ### 256 color theme
-        export LESS_TERMCAP_mb=$'[01;38;5;123m'
-        export LESS_TERMCAP_md=$'[01;38;5;74m'
+        export LESS_TERMCAP_mb=$'[01;38;5;136m'
+        export LESS_TERMCAP_md=$'[01;38;5;61m'
         export LESS_TERMCAP_me=$'[0m'
         export LESS_TERMCAP_se=$'[0m'
-        export LESS_TERMCAP_so=$'[48;5;237m[01;38;5;250m'
+        export LESS_TERMCAP_so=$'[48;5;237m[01;38;5;136m'
         export LESS_TERMCAP_ue=$'[0m'
-        export LESS_TERMCAP_us=$'[04;38;5;146m'
+        export LESS_TERMCAP_us=$'[04;38;5;37m'
         ### 256 color grep highlight option
         export GREP_COLOR="04;38;5;82"
         ### force 256 color support for tmux
