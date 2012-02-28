@@ -38,8 +38,8 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         ### 256 color grep highlight option
         export GREP_COLOR="04;38;5;82"
         ### force 256 color support for tmux
-        alias tmux='/usr/bin/tmux -2 '
-        alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=10" -sh 60 +sb -sl 0 -tn rxvt-256color'
+        #alias tmux='/usr/bin/tmux -2 '
+        alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -sh 60 +sb -sl 0'
     fi
     unset colrs
     alias ls="ls --color=auto -F"
