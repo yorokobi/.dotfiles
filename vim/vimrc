@@ -52,6 +52,7 @@ if &term =~ 'xterm'
         set t_Co=8
         set t_Sf=[3%p1%dm
         set t_Sb=[4%p1%dm
+        set t_ts=^[]2;
     else
         set t_Co=8
         set t_Sf=[3%dm
@@ -60,15 +61,16 @@ if &term =~ 'xterm'
 endif
 
 if &term =~ '-256color'
-	if has("terminfo")
-		set t_Co=256
+    if has("terminfo")
+        set t_Co=256
         set t_Sf=[3%p1%dm
         set t_Sb=[4%p1%dm
-	else
-		set t_Co=256
+        set t_ts=^[]2;
+    else
+        set t_Co=256
         set t_Sf=[3%dm
         set t_Sb=[4%dm
-	endif
+    endif
 endif
 
 " Switch syntax highlighting on
