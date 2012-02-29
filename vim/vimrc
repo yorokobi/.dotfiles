@@ -52,7 +52,8 @@ if &term =~ 'xterm'
         set t_Co=8
         set t_Sf=[3%p1%dm
         set t_Sb=[4%p1%dm
-        set t_ts=^[]2;
+        set t_ts=]2;
+        set t_fs=
     else
         set t_Co=8
         set t_Sf=[3%dm
@@ -65,7 +66,8 @@ if &term =~ '-256color'
         set t_Co=256
         set t_Sf=[3%p1%dm
         set t_Sb=[4%p1%dm
-        set t_ts=^[]2;
+        set t_ts=]2;
+        set t_fs=
     else
         set t_Co=256
         set t_Sf=[3%dm
