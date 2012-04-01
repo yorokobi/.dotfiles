@@ -1,3 +1,22 @@
 #!/bin/sh
 
-uptime | sed -e 's/,//g' | awk '{ if ($4 == "day" || $4 == "days") { split($5,a,":"); print ($3"d "a[1]"h "a[2]"m"); } else { if ($4 == "min" || $4 == "mins") { print($3"m");} else { split($3,a,":"); print (a[1]"h "a[2]"m"); } } }'
+uptime | sed -e 's/,//g' | awk '{ 
+    if ($4 == "day" || $4 == "days") {
+        if ($6 != "min") {
+            split($5,a,":");
+            print ($3"d "a[1]"h "a[2]"m");
+        }
+        else {
+            print ($3"d "$5"m");
+        }
+    }
+    else {
+        if ($4 == "min" || $4 == "mins") {
+            print($3"m");
+        }
+        else {
+            split($3,a,":");
+            print (a[1]"h "a[2]"m");
+        }
+    }
+}'
