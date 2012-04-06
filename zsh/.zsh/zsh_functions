@@ -6,7 +6,7 @@ function shwipe () {
         if [[ -e $ARG ]]; then ### shred & wipe only if the target exists
             if [[ ! -d $ARG ]]; then ### shred does not work on directories
                 echo -n "Shredding ${ARG}... "
-                /bin/shred -z $ARG
+                /usr/bin/shred -z $ARG
             fi
             echo "Wiping ${ARG}... "
             /usr/bin/wipe -rfs $ARG
