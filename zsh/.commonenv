@@ -50,6 +50,7 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         alias ls="ls -FG"
         alias ll="ls -l"
         alias grep="egrep --color=auto"
+        export LSCOLORS="gxfxcxdxbxegedabagacad"
     fi
 fi
 
