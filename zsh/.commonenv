@@ -62,7 +62,7 @@ alias la="ll -A"
 alias srm='/usr/bin/wipe -f -Q6 '
 
 if [ -x /usr/bin/pacman-color ] ; then
-    alias pman='/usr/bin/sudo /usr/bin/pacman-color'
+    alias pman='/usr/bin/pacman-color'
 fi
 
 ### Mutt aliases
