@@ -72,7 +72,7 @@ URxvt*urgentOnBell: true
 ! urlLauncher settings ----- Taken from http://wiki.archlinux.org/index.php/Xdefaults
 URxvt*perl-lib:           /usr/lib/urxvt/perl/
 URxvt*perl-ext-common:    default,matcher,xim-onthespot,selection-pastebin
-URxvt*urlLauncher:        /usr/bin/firefox
+URxvt*url-launcher:       /usr/bin/firefox
 URxvt*matcher.button:     1
 ! urxvt tab colors
 URxvt.tabbed.tabbar-fg: 4
