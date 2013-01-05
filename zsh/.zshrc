@@ -79,9 +79,10 @@ setopt HIST_SAVE_NO_DUPS
 ### Set the prompt
 colrs=$(tput colors)
 if [ $colrs -gt 255 ] ; then
-    source $HOME/.zsh/zsh_prompt256
     if [ -x /usr/bin/git ] ; then
         source $HOME/.zsh/zsh_prompt256_git
+    else
+        source $HOME/.zsh/zsh_prompt256
     fi
 elif [ $colrs -gt 7 ] ; then
     source $HOME/.zsh/zsh_prompt88
