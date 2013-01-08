@@ -43,14 +43,14 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
     fi
     unset colrs
     if [ "`uname`" = "Darwin" ]; then # are we on a Mac terminal?
-        alias ls="ls --color=auto -F"
-        alias ll="ls -l --time-style='+%c' -F"
-        alias grep='egrep --color=auto'
-    else
         alias ls="ls -FG"
         alias ll="ls -l"
         alias grep="egrep --color=auto"
         export LSCOLORS="gxfxcxdxbxegedabagacad"
+    else
+        alias ls="ls --color=auto -F"
+        alias ll="ls -l --time-style='+%c' -F"
+        alias grep='egrep --color=auto'
     fi
 fi
 
