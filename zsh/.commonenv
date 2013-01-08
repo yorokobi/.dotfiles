@@ -42,7 +42,7 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -sh 60 +sb -sl 0'
     fi
     unset colrs
-    if [ -z $TERM_PROGRAM ]; then # are we on a Mac terminal?
+    if [ "`uname`" = "Darwin" ]; then # are we on a Mac terminal?
         alias ls="ls --color=auto -F"
         alias ll="ls -l --time-style='+%c' -F"
         alias grep='egrep --color=auto'

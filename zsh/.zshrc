@@ -104,6 +104,12 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 
+### Include /Applications in tab completion
+if [ "`uname`" = "Darwin" ]; then
+    compctl -f -x 'p[2]' -s "`/bin/ls -d1 /Applications/*/*.app /Applications/*.app | sed 's|^.*/\([^/]*\)>app.*|\\1|;s/ /\\\\ /g'`" -- open
+    alias run="open -a"
+fi
+
 ### Import ZSH-specific functions
 source $HOME/.zsh/zsh_functions
 
