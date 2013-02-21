@@ -3,7 +3,7 @@
 "   Language :  bash
 "     Plugin :  bash-support.vim
 " Maintainer :  Fritz Mehner <mehner@fh-swf.de>
-"   Revision :  $Id: sh.vim,v 1.35 2010/04/10 18:42:26 mehner Exp $
+"   Revision :  $Id: sh.vim,v 1.49 2013/01/01 12:57:32 mehner Exp $
 "
 " -----------------------------------------------------------------
 "
@@ -38,7 +38,10 @@ if exists("g:BASH_Dictionary_File")
   silent! exe 'setlocal dictionary+='.save
 endif    
 "
-command! -nargs=1 -complete=customlist,BASH_StyleList   BashStyle   call BASH_Style (<f-args>)
+command! -nargs=* -complete=file                                BashCmdlineArgs     call BASH_ScriptCmdLineArguments(<q-args>)
+command! -nargs=1 -complete=customlist,BASH_KeywordCommentList  BashKeywordComment  call BASH_KeywordCommentListInsert(<f-args>)
+command! -nargs=1 -complete=customlist,BASH_ScriptSectionList   BashScriptSection   call BASH_ScriptSectionListInsert(<f-args>)
+command! -nargs=1 -complete=customlist,BASH_StyleList   				BashStyle   		    call BASH_Style(<f-args>)
 "
 " ---------- hot keys ------------------------------------------
 "
@@ -60,39 +63,39 @@ if has("gui_running")
     vmap  <buffer>  <silent>  <C-F9>   <C-C>:call BASH_Run("v")<CR>
   endif
   "
-  map   <buffer>  <silent>  <S-F9>        :call BASH_CmdLineArguments()<CR>
-  imap  <buffer>  <silent>  <S-F9>   <C-C>:call BASH_CmdLineArguments()<CR>
+  map   <buffer>            <S-F9>        :BashCmdlineArgs<Space>
+  imap  <buffer>            <S-F9>   <C-C>:BashCmdlineArgs<Space>
 endif
 "
 if !s:MSWIN
-   map  <buffer>  <silent>    <F9>        :call BASH_Debugger()<CR>:redraw!<CR>
-  imap  <buffer>  <silent>    <F9>   <C-C>:call BASH_Debugger()<CR>:redraw!<CR>
+   map  <buffer>  <silent>    <F9>        :call BASH_Debugger()<CR>
+  imap  <buffer>  <silent>    <F9>   <C-C>:call BASH_Debugger()<CR>
 endif
 "
 "
 " ---------- help ----------------------------------------------------
 "
- noremap  <buffer>  <silent>  <LocalLeader>hb            :call BASH_help('b')<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>hb       <Esc>:call BASH_help('b')<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>hb            :call BASH_help('bash')<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>hb       <Esc>:call BASH_help('bash')<CR>
 "
- noremap  <buffer>  <silent>  <LocalLeader>hh            :call BASH_help('h')<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>hh       <Esc>:call BASH_help('h')<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>hh            :call BASH_help('help')<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>hh       <Esc>:call BASH_help('help')<CR>
 "
- noremap  <buffer>  <silent>  <LocalLeader>hm            :call BASH_help('m')<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>hm       <Esc>:call BASH_help('m')<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>hm            :call BASH_help('man')<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>hm       <Esc>:call BASH_help('man')<CR>
 "
- noremap  <buffer>  <silent>  <LocalLeader>hp           :call BASH_HelpBASHsupport()<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>hp      <Esc>:call BASH_HelpBASHsupport()<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>hbs          :call BASH_HelpBASHsupport()<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>hbs     <Esc>:call BASH_HelpBASHsupport()<CR>
 "
 " ---------- comment menu ----------------------------------------------------
 "
- noremap  <buffer>  <silent>  <LocalLeader>cl           :call BASH_LineEndComment()<CR>A
-inoremap  <buffer>  <silent>  <LocalLeader>cl      <Esc>:call BASH_LineEndComment()<CR>A
+ noremap  <buffer>  <silent>  <LocalLeader>cl           :call BASH_EndOfLineComment()<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>cl      <Esc>:call BASH_EndOfLineComment()<CR>
 vnoremap  <buffer>  <silent>  <LocalLeader>cl      <Esc>:call BASH_MultiLineEndComments()<CR>A
 
- noremap  <buffer>  <silent>  <LocalLeader>cj           :call BASH_AdjustLineEndComm("a")<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>cj      <Esc>:call BASH_AdjustLineEndComm("a")<CR>
-vnoremap  <buffer>  <silent>  <LocalLeader>cj      <Esc>:call BASH_AdjustLineEndComm("v")<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>cj           :call BASH_AdjustLineEndComm()<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>cj      <Esc>:call BASH_AdjustLineEndComm()<CR>
+vnoremap  <buffer>  <silent>  <LocalLeader>cj           :call BASH_AdjustLineEndComm()<CR>
 
  noremap  <buffer>  <silent>  <LocalLeader>cs           :call BASH_GetLineEndCommCol()<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>cs      <Esc>:call BASH_GetLineEndCommCol()<CR>
@@ -106,7 +109,7 @@ inoremap  <buffer>  <silent>  <LocalLeader>ch      <Esc>:call BASH_InsertTemplat
 
  noremap    <buffer>  <silent>  <LocalLeader>cc         :call BASH_CommentToggle()<CR>j
 inoremap    <buffer>  <silent>  <LocalLeader>cc    <Esc>:call BASH_CommentToggle()<CR>j
-vnoremap    <buffer>  <silent>  <LocalLeader>cc    <Esc>:call BASH_CommentToggleRange()<CR>j
+vnoremap    <buffer>  <silent>  <LocalLeader>cc         :call BASH_CommentToggle()<CR>j
 
  noremap  <buffer>  <silent>  <LocalLeader>cd           :call BASH_InsertDateAndTime('d')<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>cd      <Esc>:call BASH_InsertDateAndTime('d')<CR>a
@@ -130,33 +133,38 @@ inoremap  <buffer>  <silent>  <LocalLeader>ckw     <C-C>$:call BASH_InsertTempla
 inoremap  <buffer>  <silent>  <LocalLeader>cko     <C-C>$:call BASH_InsertTemplate("comment.keyword-workaround")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>ckn     <C-C>$:call BASH_InsertTemplate("comment.keyword-keyword")   <CR>
 
- noremap  <buffer>  <silent>  <LocalLeader>ce           ^iecho<Space>"<End>"<Esc>j'
-inoremap  <buffer>  <silent>  <LocalLeader>ce      <C-C>^iecho<Space>"<End>"<Esc>j'
- noremap  <buffer>  <silent>  <LocalLeader>cr           0:s/^\s*echo\s\+\"// \| s/\s*\"\s*$// \| :normal ==<CR>j'
-inoremap  <buffer>  <silent>  <LocalLeader>cr      <C-C>0:s/^\s*echo\s\+\"// \| s/\s*\"\s*$// \| :normal ==<CR>j'
+ noremap  <buffer>  <silent>  <LocalLeader>ce           :call BASH_echo_comment()<CR>j'
+inoremap  <buffer>  <silent>  <LocalLeader>ce      <C-C>:call BASH_echo_comment()<CR>j'
+ noremap  <buffer>  <silent>  <LocalLeader>cr           :call BASH_remove_echo()<CR>j'
+inoremap  <buffer>  <silent>  <LocalLeader>cr      <C-C>:call BASH_remove_echo()<CR>j'
  noremap  <buffer>  <silent>  <LocalLeader>cv           :call BASH_CommentVimModeline()<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>cv      <C-C>:call BASH_CommentVimModeline()<CR>
+"
+ noremap    <buffer>            <LocalLeader>css   <Esc>:ScriptSection<Space>
+inoremap    <buffer>            <LocalLeader>css   <Esc>:ScriptSection<Space>
+ noremap    <buffer>            <LocalLeader>ckc   <Esc>:KeywordComment<Space>
+inoremap    <buffer>            <LocalLeader>ckc   <Esc>:KeywordComment<Space>
 "
 " ---------- statement menu ----------------------------------------------------
 "
  noremap  <buffer>  <silent>  <LocalLeader>sc           :call BASH_InsertTemplate("statements.case")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>sl           :call BASH_InsertTemplate("statements.elif")<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>sei          :call BASH_InsertTemplate("statements.elif")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>sf           :call BASH_InsertTemplate("statements.for-in")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>sfo          :call BASH_InsertTemplate("statements.for")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>si           :call BASH_InsertTemplate("statements.if")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>sie          :call BASH_InsertTemplate("statements.if-else")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>ss           :call BASH_InsertTemplate("statements.select")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>st           :call BASH_InsertTemplate("statements.until")<CR>
+ noremap  <buffer>  <silent>  <LocalLeader>su           :call BASH_InsertTemplate("statements.until")<CR>
  noremap  <buffer>  <silent>  <LocalLeader>sw           :call BASH_InsertTemplate("statements.while")<CR>
 
 inoremap  <buffer>  <silent>  <LocalLeader>sc      <Esc>:call BASH_InsertTemplate("statements.case")<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>sl      <Esc>:call BASH_InsertTemplate("statements.elif")<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>sei     <Esc>:call BASH_InsertTemplate("statements.elif")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>sf      <Esc>:call BASH_InsertTemplate("statements.for-in")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>sfo     <Esc>:call BASH_InsertTemplate("statements.for")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>si      <Esc>:call BASH_InsertTemplate("statements.if")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>sie     <Esc>:call BASH_InsertTemplate("statements.if-else")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>ss      <Esc>:call BASH_InsertTemplate("statements.select")<CR>
-inoremap  <buffer>  <silent>  <LocalLeader>st      <Esc>:call BASH_InsertTemplate("statements.until")<CR>
+inoremap  <buffer>  <silent>  <LocalLeader>su      <Esc>:call BASH_InsertTemplate("statements.until")<CR>
 inoremap  <buffer>  <silent>  <LocalLeader>sw      <Esc>:call BASH_InsertTemplate("statements.while")<CR>
 
 vnoremap  <buffer>  <silent>  <LocalLeader>sf      <Esc>:call BASH_InsertTemplate("statements.for-in", "v")<CR>
@@ -164,7 +172,7 @@ vnoremap  <buffer>  <silent>  <LocalLeader>sfo     <Esc>:call BASH_InsertTemplat
 vnoremap  <buffer>  <silent>  <LocalLeader>si      <Esc>:call BASH_InsertTemplate("statements.if", "v")<CR>
 vnoremap  <buffer>  <silent>  <LocalLeader>sie     <Esc>:call BASH_InsertTemplate("statements.if-else", "v")<CR>
 vnoremap  <buffer>  <silent>  <LocalLeader>ss      <Esc>:call BASH_InsertTemplate("statements.select", "v")<CR>
-vnoremap  <buffer>  <silent>  <LocalLeader>st      <Esc>:call BASH_InsertTemplate("statements.until", "v")<CR>
+vnoremap  <buffer>  <silent>  <LocalLeader>su      <Esc>:call BASH_InsertTemplate("statements.until", "v")<CR>
 vnoremap  <buffer>  <silent>  <LocalLeader>sw      <Esc>:call BASH_InsertTemplate("statements.while", "v")<CR>
 
  noremap  <buffer>  <silent>  <LocalLeader>sfu          :call BASH_InsertTemplate("statements.function")<CR>
@@ -183,9 +191,25 @@ vnoremap  <buffer>  <silent>  <LocalLeader>se      <Esc>:call BASH_InsertTemplat
 inoremap  <buffer>  <silent>  <LocalLeader>sa       ${[]}<Left><Left><Left>
 vnoremap  <buffer>  <silent>  <LocalLeader>sa      s${[]}<Left><Left><Esc>P
 
- noremap  <buffer>  <silent>  <LocalLeader>sas     a${[@]}<Left><Left><Left><Left>
-inoremap  <buffer>  <silent>  <LocalLeader>sas      ${[@]}<Left><Left><Left><Left>
-vnoremap  <buffer>  <silent>  <LocalLeader>sas     s${[@]}<Left><Left><Left><Esc>P
+ noremap  <buffer>  <silent>  <LocalLeader>saa     a${[@]}<Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>saa      ${[@]}<Left><Left><Left><Left>
+vnoremap  <buffer>  <silent>  <LocalLeader>saa     s${[@]}<Left><Left><Left><Esc>P
+
+ noremap  <buffer>  <silent>  <LocalLeader>sa1     a${[*]}<Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>sa1      ${[*]}<Left><Left><Left><Left>
+vnoremap  <buffer>  <silent>  <LocalLeader>sa1     s${[*]}<Left><Left><Left><Esc>P
+
+ noremap  <buffer>  <silent>  <LocalLeader>ssa     a${[@]::}<Left><Left><Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>ssa      ${[@]::}<Left><Left><Left><Left><Left><Left>
+vnoremap  <buffer>  <silent>  <LocalLeader>ssa     s${[@]::}<Left><Left><Left><Left><Left><Esc>P
+
+ noremap  <buffer>  <silent>  <LocalLeader>san     a${#[@]}<Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>san      ${#[@]}<Left><Left><Left><Left>
+vnoremap  <buffer>  <silent>  <LocalLeader>san     s${#[@]}<Left><Left><Left><Esc>P
+
+ noremap  <buffer>  <silent>  <LocalLeader>sai     a${![*]}<Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>sai      ${![*]}<Left><Left><Left><Left>
+vnoremap  <buffer>  <silent>  <LocalLeader>sai     s${![*]}<Left><Left><Left><Esc>P
   "
   " ----------------------------------------------------------------------------
   " POSIX character classes
@@ -226,37 +250,56 @@ inoremap  <buffer>  <silent>  <LocalLeader>px    [:xdigit:]
 "
 " ---------- snippet menu ----------------------------------------------------
 "
- noremap  <buffer>  <silent>  <LocalLeader>nr         :call BASH_CodeSnippets("r")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>nw         :call BASH_CodeSnippets("w")<CR>
-vnoremap  <buffer>  <silent>  <LocalLeader>nw    <C-C>:call BASH_CodeSnippets("wv")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>ne         :call BASH_CodeSnippets("e")<CR>
-  "
- noremap  <buffer>  <silent>  <LocalLeader>ntl        :call BASH_EditTemplates("local")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>ntg        :call BASH_EditTemplates("global")<CR>
- noremap  <buffer>  <silent>  <LocalLeader>ntr        :call BASH_RereadTemplates()<CR>
- noremap  <buffer>            <LocalLeader>nts   <Esc>:BashStyle<Space>
+nnoremap  <buffer>  <silent>  <LocalLeader>nr         :call BASH_CodeSnippets("read")<CR>
+nnoremap  <buffer>  <silent>  <LocalLeader>nv         :call BASH_CodeSnippets("view")<CR>
+nnoremap  <buffer>  <silent>  <LocalLeader>nw         :call BASH_CodeSnippets("write")<CR>
+vnoremap  <buffer>  <silent>  <LocalLeader>nw    <C-C>:call BASH_CodeSnippets("writemarked")<CR>
+nnoremap  <buffer>  <silent>  <LocalLeader>ne         :call BASH_CodeSnippets("edit")<CR>
+"
+nnoremap  <buffer>  <silent>  <LocalLeader>ntl        :call BASH_BrowseTemplateFiles("Local")<CR>
+nnoremap  <buffer>  <silent>  <LocalLeader>ntg        :call BASH_BrowseTemplateFiles("Global")<CR> 
+nnoremap  <buffer>  <silent>  <LocalLeader>ntr        :call BASH_RereadTemplates()<CR>
+nnoremap  <buffer>            <LocalLeader>nts        :BashStyle<Space>
+"
+ inoremap  <buffer>  <silent>  <LocalLeader>nr    <Esc>:call BASH_CodeSnippets("read")<CR>
+ inoremap  <buffer>  <silent>  <LocalLeader>nv    <Esc>:call BASH_CodeSnippets("view")<CR>
+ inoremap  <buffer>  <silent>  <LocalLeader>nw    <Esc>:call BASH_CodeSnippets("write")<CR>
+ inoremap  <buffer>  <silent>  <LocalLeader>ne    <Esc>:call BASH_CodeSnippets("edit")<CR>
+"
+ inoremap  <buffer>  <silent>  <LocalLeader>ntl   <Esc>:call BASH_BrowseTemplateFiles("Local")<CR>
+ inoremap  <buffer>  <silent>  <LocalLeader>ntg   <Esc>:call BASH_BrowseTemplateFiles("Global")<CR> 
+ inoremap  <buffer>  <silent>  <LocalLeader>ntr   <Esc>:call BASH_RereadTemplates()<CR>
+ inoremap  <buffer>            <LocalLeader>nts   <Esc>:BashStyle<Space>
+"
+" ---------- test  ----------------------------------------------------
+"
+nnoremap  <buffer>  <silent>  <LocalLeader>t1   a[ -  ]<Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>t1    [ -  ]<Left><Left><Left>
+"
+nnoremap  <buffer>  <silent>  <LocalLeader>t2   a[  -  ]<Left><Left><Left><Left><Left>
+inoremap  <buffer>  <silent>  <LocalLeader>t2    [  -  ]<Left><Left><Left><Left><Left>
 "
 " ---------- run menu ----------------------------------------------------
 "
-if !s:MSWIN
-   map  <buffer>  <silent>  <LocalLeader>re           :call BASH_MakeScriptExecutable()<CR>
-  imap  <buffer>  <silent>  <LocalLeader>re      <Esc>:call BASH_MakeScriptExecutable()<CR>
-endif
-
  map  <buffer>  <silent>  <LocalLeader>rr           :call BASH_Run("n")<CR>
 imap  <buffer>  <silent>  <LocalLeader>rr      <Esc>:call BASH_Run("n")<CR>
- map  <buffer>  <silent>  <LocalLeader>ra           :call BASH_CmdLineArguments()<CR>
-imap  <buffer>  <silent>  <LocalLeader>ra      <Esc>:call BASH_CmdLineArguments()<CR>
+ map  <buffer>            <LocalLeader>ra           :BashCmdlineArgs<Space>
+imap  <buffer>            <LocalLeader>ra      <Esc>:BashCmdlineArgs<Space>
+ map  <buffer>  <silent>  <LocalLeader>rba          :call BASH_BashCmdLineArguments()<CR>
+imap  <buffer>  <silent>  <LocalLeader>rba     <Esc>:call BASH_BashCmdLineArguments()<CR>
+
+ map  <buffer>  <silent>  <LocalLeader>rc           :call BASH_SyntaxCheck()<CR>
+imap  <buffer>  <silent>  <LocalLeader>rc      <Esc>:call BASH_SyntaxCheck()<CR>
+
+ map  <buffer>  <silent>  <LocalLeader>rco          :call BASH_SyntaxCheckOptionsLocal()<CR>
+imap  <buffer>  <silent>  <LocalLeader>rco     <Esc>:call BASH_SyntaxCheckOptionsLocal()<CR>
 
 if !s:MSWIN
-   map  <buffer>  <silent>  <LocalLeader>rc           :call BASH_SyntaxCheck()<CR>
-  imap  <buffer>  <silent>  <LocalLeader>rc      <Esc>:call BASH_SyntaxCheck()<CR>
+   map  <buffer> <silent> <LocalLeader>re           :call BASH_MakeScriptExecutable()<CR>
+  imap  <buffer> <silent> <LocalLeader>re      <Esc>:call BASH_MakeScriptExecutable()<CR>
 
-   map  <buffer>  <silent>  <LocalLeader>rco          :call BASH_SyntaxCheckOptionsLocal()<CR>
-  imap  <buffer>  <silent>  <LocalLeader>rco     <Esc>:call BASH_SyntaxCheckOptionsLocal()<CR>
-
-   map  <buffer>  <silent>  <LocalLeader>rd           :call BASH_Debugger()<CR>:redraw!<CR>
-  imap  <buffer>  <silent>  <LocalLeader>rd      <Esc>:call BASH_Debugger()<CR>:redraw!<CR>
+   map  <buffer>  <silent>  <LocalLeader>rd           :call BASH_Debugger()<CR>
+  imap  <buffer>  <silent>  <LocalLeader>rd      <Esc>:call BASH_Debugger()<CR>
 
   vmap  <buffer>  <silent>  <LocalLeader>rr      <Esc>:call BASH_Run("v")<CR>
 
@@ -286,11 +329,9 @@ endif
 "                      masks the normal mode command '' (jump to the position
 "                      before the latest jump)
 " additional mapping : double quotes around a Word (non-whitespaces)
-" additional mapping : parentheses around a word (word characters)
 "-------------------------------------------------------------------------------
 nnoremap    <buffer>   ''   ciW''<Esc>P
 nnoremap    <buffer>   ""   ciW""<Esc>P
-"nnoremap   <buffer>   {{   ciw{}<Esc>PF{
 "
 if !exists("g:BASH_Ctrl_j") || ( exists("g:BASH_Ctrl_j") && g:BASH_Ctrl_j != 'off' )
   nmap    <buffer>  <silent>  <C-j>   i<C-R>=BASH_JumpCtrlJ()<CR>

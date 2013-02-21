@@ -1,4 +1,99 @@
 =======================================================================================
+  RELEASE NOTES FOR VERSION 3.12
+=======================================================================================
+- New global variable g:BASH_InsertFileHeader (suppress file description comment for new files)
+- New menu item 'view code snippet' (\nv).
+- New ex command BASH_ScriptCmdLineArguments.
+- 3 ex commands renamed.
+- Minor internal improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.11
+=======================================================================================
+- Rendering of manuals (\hm) and Bash help (\hh).
+- Bugfix: \hb, \hm, \hh not working.
+- Minor internal improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.10
+=======================================================================================
+- Resolve $HOME for linked home directories.
+- Wrong insertion for parameter substitution "match beginning; del longest
+  part" (thanks to John Orr).
+- Other minor bugs fixed.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.9
+=======================================================================================
+- Hotkey renamed: \st -> \su
+- New global variable allows loading menus only with filetype 'sh'.
+- Comments: echo "<line>" escapes double quotes in original text.
+- Other minor bugs fixed.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.8
+=======================================================================================
+- New comment submenu 'script sections'.
+- Two new hotkeys \css, \ckc for commenting.
+- Two new plugin tags: LICENSE,ORGANIZATION
+- Run menu: new item 'Bash cmd. line arg.' (\rba).  
+- I/O-Redir-menu: additional item'>&2'
+- System-wide installation: minimal Template file for a user will automatically
+  be added.
+- Hotkey renamed: \t -> \t1
+- A few code snippets for debugging added.
+- Bugfix: \cl did not work in insert mode.
+- Other minor bugs fixed.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.7
+=======================================================================================
+- The three hotkeys \cl, \cj, \cc allow a range, e.g. '3\cl' (see help text and
+	bash-hot-key.pdf).
+- Plugin loads faster: loading the templates is delayed until the first use.
+- Plugin now works with pathogen.vim.
+- Menus will always be generated (for the use with :emenu).
+- Bugfix: no local templates available with a system-wide installation (thanks to Iain Arnell).
+- Several improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.6
+=======================================================================================
+- New hotkey \ssa and menu entry for the selection of a subarray.
+- Bugfix: detection of a systemwide installation can fail.
+- Minor improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.5
+=======================================================================================
+- Bugfix: detection of a systemwide installation can fail.
+- Minor improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.4
+=======================================================================================
+- 2 new hotkeys: \t, \t2 (empty tests)
+- Windows: user and system installation.
+- Syntax check under Windows.
+- Several minor bugsfixed.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.3
+=======================================================================================
+- 3 hotkeys renamed: \sl -> \sei (elif), \sas -> \saa ( ${.[@]} ) , \hp -> \hbs.
+- 3 new hotkeys: \sa1 ( ${.[*]} ), \san ( ${#.[@]} ), \sai ( ${!.[@]} ).
+- 1 new menu entry (Tests)
+- Minor improvements.
+
+=======================================================================================
+  RELEASE NOTES FOR VERSION 3.2
+=======================================================================================
+- New hotkey and menu entry for [[ =~ ]]
+- New for Bash 4.1: shopt 'compat40', variables '$BASHOPTS', '$BASH_XTRACEFD'.
+- Bugfixes: local installation looks like a system-wide installation in seldom cases.
+- Bugfixes: typo in 4 menu entries.
+
+=======================================================================================
   RELEASE NOTES FOR VERSION 3.1.1
 =======================================================================================
 - Bugfixes: code snippets will not be found if plugin not installed beyond '$HOME/.vim'.

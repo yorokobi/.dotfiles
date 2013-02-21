@@ -1,4 +1,94 @@
 ---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 5.0.1
+---------------------------------------------------------------------------------------
+- Bugfix: resolve home for linked home directories
+- Bugfix: ":make" and ":!make" no longer affect each other.
+- Bugfix: S-F1 not working for module list.
+- Several internal improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 5.0
+---------------------------------------------------------------------------------------
+
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ++  The plug-in version 5.0+ is a rewriting of version 4.15+.               ++
+  ++  The versions 5.0+ are based on a new and more powerful template system  ++
+  ++  (please see |template-support|for more information).                    ++
+  ++  The template syntax has changed!                                        ++
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+- New template system (many thanks to Wolfgang Mehner)
+- A few new hotkeys and menu item.
+- A few hotkeys and menu items renamed.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.15
+---------------------------------------------------------------------------------------
+- Two new plugin tags: LICENCE, ORGANIZATION.
+- System-wide installation: minimal Template file for a user will automatically
+  be added.
+- Hotkeys \lcs, \ucs removed.
+- Minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.14
+---------------------------------------------------------------------------------------
+- Plugin loads faster: loading the templates is delayed until the first use.
+- Plugin now works with pathogen.vim.
+- Menus will always be generated (for the use with :emenu).
+- Bugfix: no local templates available with a system-wide installation (thanks
+	to Iain Arnell).
+- Minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.13
+---------------------------------------------------------------------------------------
+- Several hotkeys allow a range, e.g. '3\cl' (see help text and perl-hot-key.pdf).
+- perltidy backup files optional.
+- POD files have no longer filetype 'perl' (preserves proper syntyx highlighting).
+- Running Perl as debugger (\rd, F9) uses Perl switches set with \rw (thanks to Sébastien Nobili).
+- Minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.12
+---------------------------------------------------------------------------------------
+- New: folding for the plugin list.
+- perltidy can be used as standard beautifier (commands "={motion}" ).
+- perltidy writes backup files.
+- perltidy error handling improved.
+- Bugfix: ddd not running from Vim under a display manager.
+- Minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.11
+---------------------------------------------------------------------------------------
+- Perl::Critic integration: severity and verbosity will be taken from the
+	configuration file if specificed.
+- Bugfix (Windows only): wrong quoting with command line parameters.
+- Several minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.10
+---------------------------------------------------------------------------------------
+- Bugfix: detection of a systemwide installation can fail.
+- Minor improvements.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.9
+---------------------------------------------------------------------------------------
+- Windows: user and system installation.
+- Integration of Perl::Tags reworked.
+- Several minor bugfixes.
+
+---------------------------------------------------------------------------------------
+  RELEASE NOTES FOR VERSION 4.8
+---------------------------------------------------------------------------------------
+- Hotkeys \$x, \@x and \%x renamed (to avoid conflicts when writing references).
+- Bugfix, Regex-Tester: colouring matches shows an error message in a few cases.
+
+---------------------------------------------------------------------------------------
   RELEASE NOTES FOR VERSION 4.7.1
 ---------------------------------------------------------------------------------------
 - Bugfixes: insertion of Posix classes from the menu not working properly.
