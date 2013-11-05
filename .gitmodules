@@ -1,12 +1,12 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
+	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/pathogen"]
 	path = vim/bundle/pathogen
-	url = http://github.com/tpope/vim-pathogen.git
+	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vim/bundle/python"]
 	path = vim/bundle/python
-	url = http://github.com/vim-scripts/python.vim.git
+	url = https://github.com/vim-scripts/python.vim.git
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
