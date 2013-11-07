@@ -19,3 +19,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/vim-splunk"]
+	path = vim/bundle/vim-splunk
+	url = git@github.com:yorokobi/vim-splunk.git
