@@ -47,6 +47,8 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         alias ll="ls -l"
         alias grep="egrep --color=auto"
         export LSCOLORS="gxfxcxdxbxegedabagacad"
+        export COPYFILE_DISABLE=true
+        export COPY_EXTENDED_ATTRIBUTES_DISABLED=true
     else
         alias ls="ls --color=auto -F"
         alias ll="ls -l --time-style='+%c' -F"
