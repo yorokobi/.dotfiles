@@ -3,3 +3,4 @@
 *.ctags
 /zsh/.zsh/cache
 /vim/.netrwhist
+/vim/bundle
