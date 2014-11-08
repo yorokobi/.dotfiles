@@ -80,7 +80,7 @@ alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
 
 export EDITOR=vim
 export PAGER=less
-export LESS='-Fex4MX'
+export LESS='-FeRx4MX'
 
 #eval `/usr/bin/ssh-agent`
 #SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
