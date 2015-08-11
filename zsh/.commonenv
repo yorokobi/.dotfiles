@@ -49,6 +49,12 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         export LSCOLORS="gxfxcxdxbxegedabagacad"
         export COPYFILE_DISABLE=true
         export COPY_EXTENDED_ATTRIBUTES_DISABLED=true
+    elif [ $(uname) = "OpenBSD" ] ; then
+        if [[ -e $(which colorls) ]]; then
+            alias ls="colorls -FG"
+            alias ll="ls -l"
+            export LSCOLORS="gxfxcxdxbxegedabagacad"
+        fi
     else
         alias ls="ls --color=auto -F"
         alias ll="ls -l --time-style='+%c' -F"
