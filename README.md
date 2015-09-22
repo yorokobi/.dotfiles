@@ -1,4 +1,1 @@
-Syntax highlighting for Splunk's .conf files
-=============
-
-This project is public domain. Questions? Comments? Corrections? Contributions? Send me an email: colbyw at gmail dot com
+The files contained in this git repository are public domain except where noted otherwise. Some items are scraped from other users. If I failed to give credit where due, contact me with the details and I will update the affected file(s).
