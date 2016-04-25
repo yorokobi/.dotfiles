@@ -141,6 +141,9 @@ if version >= 500
     " Nice default colorscheme
     colorscheme solarized
 
+    " Make comments italic (where supported by terminal/font)
+    hi Comment cterm=italic
+
     " Working on building nice development environment
     "map <Leader>v :vsplit<CR>:vertical resize 20<CR>:Explore<CR><C-W>l<C-W>sz1<CR><C-W>j<C-W>h
 
