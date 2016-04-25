@@ -11,6 +11,9 @@ if has("autocmd")
     filetype plugin on
     filetype indent on
 
+    " Keep cursor in the center of the window
+    auto CursorMoved * normal zz
+
     autocmd FileType python set omnifunc=pythoncomplete#Complete
     " Some additions from http://wiki.python.org/moin/Vim
     "autocmd BufRead,BufNewFile *.py syntax on
