@@ -1,0 +1,182 @@
+"autocmd BufEnter * :lcd %:p:h
+
+" Re-source .vimrc on write
+autocmd! bufwritepost .vimrc source %
+
+execute pathogen#infect()
+
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+set guifont=Source\ Code\ Pro:h18
+if has("autocmd")
+    filetype plugin on
+    filetype indent on
+
+    "auto CursorMoved * normal zz
+endif
+
+" Make UTF-8
+set enc=utf-8
+set fenc=utf-8
+set termencoding=utf-8
+
+" Try and enable color for xterms
+if &term =~ 'xterm'
+    if has("terminfo")
+        set t_Co=8
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+        set t_ts=]2;
+        set t_fs=
+    else
+        set t_Co=8
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+endif
+
+if &term =~ '-256color'
+    if has("terminfo")
+        set t_Co=256
+        set t_Sf=[3%p1%dm
+        set t_Sb=[4%p1%dm
+        set t_ts=]2;
+        set t_fs=
+        set termguicolors
+        " set Vim-specific sequences for RGB colors
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    else
+        set t_Co=256
+        set t_Sf=[3%dm
+        set t_Sb=[4%dm
+    endif
+endif
+
+" Switch syntax highlighting on
+syntax on
+set hlsearch
+set modeline
+
+" Display bufnr:filetype (dos,unix,mac) in status line
+set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P
+
+" === VERSION 5.00 AND UP SETTINGS ===
+" Only do this for Vim version 5.0 and later.
+if version >= 500
+
+    set notitle
+
+    set expandtab
+    set softtabstop=4
+    set shiftwidth=4
+    set smartcase
+    set number
+    set noequalalways
+    "set smartindent
+"    set backspace=indent,start
+    
+    set bs=2		        " allow backspacing over everything in insert mode
+    set ai			" always set autoindenting on
+    set sta			" Split the window for the found tag
+"   set tw=72			" Auto wrap text at 72 chars
+    set nobackup	        " don't keep a backup file
+    "set viminfo='20,\"50	" read/write a .viminfo file, don't store more
+    			        " than 50 lines of registers
+    set history=50		" keep 50 lines of command line history
+    set ruler		        " show the cursor position all the time
+    set cursorline              " highlight the line the cursor is on
+    set cursorcolumn            " highlight the column the cursor is on
+    "set nowrap                 " make sure that long lines don't wrap
+    set wrap
+    set background=dark         " Make sure we have a nice dark background
+    set laststatus=2            " Make sure the status line is always displayed
+
+    " Hide the mouse pointer while typing
+    " The window with the mouse pointer does not automatically become the active window
+    " Right mouse button extends selections
+    " Turn on mouse support
+    set mousehide
+    set nomousefocus
+    set mousemodel=extend
+    set mouse=a
+
+
+    " Show paren matches
+    " For 2 tenths of a second
+    set showmatch
+    set matchtime=2
+
+    "let g:solarized_termcolors=256
+    let g:solarized_termtrans=0
+    let g:solarized_degrade=0
+    let g:solarized_bold=1
+    let g:solarized_underline=1
+    let g:solarized_italic=1
+    let g:solarized_style="dark"
+    let g:solarized_contrast="normal"
+
+    " Nice default colorscheme
+    "colorscheme solarized
+    colorscheme solarized8
+    " Remove underline from highlighted lines
+    hi CursorLine term=none cterm=none 
+
+    " Working on building nice development environment
+    "map <Leader>v :vsplit<CR>:vertical resize 20<CR>:Explore<CR><C-W>l<C-W>sz1<CR><C-W>j<C-W>h
+
+    runtime macros/matchit.vim
+
+    highlight Comment cterm=italic
+
+endif
+
+" Map H to stop highlighting search matches
+noremap H :set hlsearch!<CR>
+
+" Make shift-insert work like in Xterm
+noremap <S-Insert> <MiddleMouse>
+noremap! <S-Insert> <MiddleMouse>
+
+set number
+set numberwidth=4
+map <F4> :set number! <cr>
+
+" Taken from http://vimcasts.org/episodes/indentation-commands/
+nmap <D-[> <<
+nmap <D-]> >>
+vmap <D-[> <gv
+vmap <D-]> >gv
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" terraform
+map <F3> :TerraformFmt <cr>
+let g:terraform_fmt_on_save = 1
+let g:terraform_align = 1
+
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+"powerline
+"set rtp+=~/Documents/Personal/vcs/powerline/powerline/bindings/vim
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup

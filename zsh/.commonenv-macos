@@ -1,0 +1,137 @@
+#
+# Common environmental settings (shell agnostic)
+#
+
+### enable/disable color support
+if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or linux (tty)
+    colrs=$(tput colors)
+    if [ $colrs -gt 7 -a $colrs -lt 89 ] ; then         # treat 88 color term as 16 color term
+        if [ -f $HOME/.dircolors ] ; then
+            source $HOME/.dircolors
+        fi
+        export GREP_COLOR="1;4;32"                      # underlined bold green
+        ### Colorize less
+        export LESS_TERMCAP_mb=$'[01;36m'             # bold cyan
+        export LESS_TERMCAP_md=$'[01;36m'             # bold cyan
+        export LESS_TERMCAP_me=$'[0m'                 # no color (m{b,d} end)
+        export LESS_TERMCAP_se=$'[0m'                 # no color
+        export LESS_TERMCAP_so=$'[01;44;33m'          # bold yellow on blue background (status bar)
+        export LESS_TERMCAP_ue=$'[0m'                 # no color (underline end)
+        export LESS_TERMCAP_us=$'[04;32m'             # underlined green (underline start)
+    fi
+    if [ $colrs -gt 255 ] ; then
+        if [[ -f $HOME/.dircolors256 ]] ; then
+            source $HOME/.dircolors256
+        fi
+        ### enable colors in gnome-terminal
+        if [[ $COLORTERM = "gnome-terminal" ]] ; then
+            export TERM="screen-256color"
+        fi
+        ### 256 color theme
+        export LESS_TERMCAP_mb=$'[01;38;5;136m'
+        export LESS_TERMCAP_md=$'[01;38;5;61m'
+        export LESS_TERMCAP_me=$'[0m'
+        export LESS_TERMCAP_se=$'[0m'
+        export LESS_TERMCAP_so=$'[48;5;237m[01;38;5;136m'
+        export LESS_TERMCAP_ue=$'[0m'
+        export LESS_TERMCAP_us=$'[04;38;5;37m'
+        ### 256 color grep highlight option
+        export GREP_COLOR="04;38;5;82"
+        ### force 256 color support for tmux
+        #alias tmux='/usr/bin/tmux -2 '
+        alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -sh 60 +sb -sl 0'
+    fi
+    unset colrs
+    if [ "`uname`" = "Darwin" ]; then # are we on a Mac terminal?
+        alias ls="ls -FG"
+        alias ll="ls -l"
+        alias grep="egrep --color=auto"
+        export LSCOLORS="gxfxcxdxbxegedabagacad"
+        export COPYFILE_DISABLE=true
+        export COPY_EXTENDED_ATTRIBUTES_DISABLED=true
+    elif [ $(uname) = "OpenBSD" ] ; then
+        if [[ -e $(which colorls) ]]; then
+            alias ls="colorls -FG"
+            alias ll="ls -l"
+            export LSCOLORS="gxfxcxdxbxegedabagacad"
+        fi
+    else
+        alias ls="ls --color=auto -F"
+        alias ll="ls -l --time-style='+%c' -F"
+        alias grep='egrep --color=auto'
+    fi
+fi
+
+### some more ls aliases
+alias ltr="ll -tr"
+alias la="ll -A"
+#alias l="ls -CF"
+
+alias srm='/usr/bin/wipe -f -Q6 '
+
+if [ -x /usr/bin/pacman-color ] ; then
+    alias pman='/usr/bin/pacman-color'
+fi
+
+### Mutt aliases
+#alias muttl="mutt -F $HOME/.mutt/.muttrc-local"
+#alias mutti="mutt -F $HOME/.mutt/.muttrc-imap"
+alias mutt="cd $HOME/.mail && mutt -F $HOME/.mutt/muttrc && cd -"
+
+if [ -z $DISPLAY ] ; then
+    export PATH=$PATH:$HOME/Private/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/Users/cwilliams/Library/Python/3.7/bin
+fi
+alias aoeu='setxkbmap -rules xfree86 -model pc105 -layout us -variant basic'
+alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
+
+export EDITOR=vim
+export PAGER=less
+export LESS='-FeRx4MX'
+
+#eval `/usr/bin/ssh-agent`
+#SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
+if [ -f /usr/lib/ssh/gnome-ssh-askpass2 ] ; then
+    export SSH_ASKPASS=/usr/lib/ssh/gnome-ssh-askpass2
+fi
+
+### not all remote systems support more complex termcaps
+#alias ssh='TERM=xterm ssh '
+
+### make vim a pager like less|more|most
+if [ -f /usr/share/vim/vim72/macros/less.sh ] ; then
+    alias vless='/usr/share/vim/vim72/macros/less.sh '
+fi
+### for vim 7.3
+if [ -f /usr/share/vim/vim73/macros/less.sh ] ; then
+    alias vless='/usr/share/vim/vim73/macros/less.sh '
+fi
+
+### quickly encrypt files with my GPG key
+alias encrypt='gpg -r D074EA73 -e '
+
+### alias telnet
+if [ -e /usr/bin/ktelnet ] ; then
+    alias telnet='ktelnet '
+fi
+
+#### Disabled because rxvt-unicode behaves differently than other shells
+###+ and it doesn't seem to be required at this point
+### iBus
+#export GTK_IM_MODULE=ibus
+#export XMODIFIERS=@im=ibus
+#export QT_IM_MODULE=ibus
+
+### Keychain
+#/usr/bin/keychain -Q -q ~/.ssh/id_rsa
+#[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && source $HOME/.keychain/$HOSTNAME-sh
+
+### SCIM and iBus
+#export XMODIFIERS=@im=SCIM
+#export GTK_IM_MODULE="ibus"
+#export QT_IM_MODULE="ibus"
+
+### Python Docs
+export PYTHONDOCS=/usr/share/doc/python/html/
+
+### Allow for more frequent querying with brew
+#export HOMEBREW_GITHUB_API_TOKEN=""
