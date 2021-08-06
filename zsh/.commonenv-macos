@@ -78,11 +78,11 @@ fi
 #alias mutti="mutt -F $HOME/.mutt/.muttrc-imap"
 alias mutt="cd $HOME/.mail && mutt -F $HOME/.mutt/muttrc && cd -"
 
-if [ -z $DISPLAY ] ; then
-    export PATH=$PATH:$HOME/Private/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/Users/cwilliams/Library/Python/3.7/bin
-fi
-alias aoeu='setxkbmap -rules xfree86 -model pc105 -layout us -variant basic'
-alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
+#if [ -z $DISPLAY ] ; then
+#    export PATH=$PATH:$HOME/Private/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/Users/cwilliams/Library/Python/3.7/bin
+#fi
+#alias aoeu='setxkbmap -rules xfree86 -model pc105 -layout us -variant basic'
+#alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
 
 export EDITOR=vim
 export PAGER=less
@@ -95,16 +95,16 @@ if [ -f /usr/lib/ssh/gnome-ssh-askpass2 ] ; then
 fi
 
 ### not all remote systems support more complex termcaps
-#alias ssh='TERM=xterm ssh '
+alias ssh='TERM=xterm-256color ssh '
 
 ### make vim a pager like less|more|most
-if [ -f /usr/share/vim/vim72/macros/less.sh ] ; then
-    alias vless='/usr/share/vim/vim72/macros/less.sh '
-fi
+#if [ -f /usr/share/vim/vim72/macros/less.sh ] ; then
+#    alias vless='/usr/share/vim/vim72/macros/less.sh '
+#fi
 ### for vim 7.3
-if [ -f /usr/share/vim/vim73/macros/less.sh ] ; then
-    alias vless='/usr/share/vim/vim73/macros/less.sh '
-fi
+#if [ -f /usr/share/vim/vim73/macros/less.sh ] ; then
+#    alias vless='/usr/share/vim/vim73/macros/less.sh '
+#fi
 
 ### quickly encrypt files with my GPG key
 alias encrypt='gpg -r D074EA73 -e '
@@ -132,6 +132,3 @@ fi
 
 ### Python Docs
 export PYTHONDOCS=/usr/share/doc/python/html/
-
-### Allow for more frequent querying with brew
-#export HOMEBREW_GITHUB_API_TOKEN=""
