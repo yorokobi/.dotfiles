@@ -1,2 +1,0 @@
-# MIN HOUR DAY MONTH DAYOFWEEK  COMMAND
-0 * * * * ~/Private/bin/clearFlashCookies.sh

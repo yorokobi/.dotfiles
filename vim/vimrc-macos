@@ -3,8 +3,6 @@
 " Re-source .vimrc on write
 autocmd! bufwritepost .vimrc source %
 
-execute pathogen#infect()
-
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -120,6 +118,7 @@ if version >= 500
 
     " Nice default colorscheme
     "colorscheme solarized
+    " https://github.com/lifepillar/vim-solarized8
     colorscheme solarized8
     " Remove underline from highlighted lines
     hi CursorLine term=none cterm=none 

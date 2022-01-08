@@ -3,7 +3,7 @@ set lines=30
 
 " set the X11 font to use
 " set guifont=-misc-fixed-medium-r-normal--14-130-75-75-c-70-iso8859-1
-set guifont=DejaVu\ Sans\ Mono\ 10
+set guifont=Source\ Code\ Pro\ 12
 
 " Display bufnr:filetype (dos,unix,mac) in status line
 set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P

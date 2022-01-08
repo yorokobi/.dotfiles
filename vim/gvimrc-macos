@@ -15,35 +15,7 @@ if has("autocmd")
     filetype plugin on
     filetype indent on
 
-"    autocmd FileType python set omnifunc=pythoncomplete#Complete
-"    " Some additions from http://wiki.python.org/moin/Vim
-"    "autocmd BufRead,BufNewFile *.py syntax on
-"    autocmd BufRead,BufNewFile *.py set ai
-"    autocmd BufRead *.py set cindent cinwords=if,elif,else,for,while,with,try,except,finally,def,class
-"    autocmd BufRead *.py set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-"    autocmd BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
-"    inoremap <Nul> <C-x><C-o>
-"    set tags+=$HOME/.vim/tags/python27.ctags
-"    set tags+=$HOME/.vim/tags/python32.ctags
-"    set tags+=$HOME/.vim/tags/perl5.ctags
-"    set tags+=$HOME/.vim/tags/php.ctags
-"    let g:ctags_statusline=1
-"    map <silent><A-Right> :tabnext<CR>
-"    map <silent><A-Left> :tabprevious<CR>
 endif
-
-"python << EOF
-"import os
-"import sys
-"import vim
-"for p in sys.path:
-"    if os.path.isdir(p):
-"        vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
-"def EvaluateCurrentRange():
-"    eval(compile('\n'.join(vim.current.range),'','exec'),globals())
-"EOF
-
-"map <C-h> :py EvaluateCurrentRange()
 
 " Make UTF-8
 set enc=utf-8
