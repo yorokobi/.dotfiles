@@ -1,4 +1,5 @@
-! Make the caps lock button a backspace button
-!
-remove Lock = Caps_Lock
-keycode 66 = BackSpace
+! Make the caps lock button Ctrl 
+
+keycode 66 = Control_L
+clear Lock
+add Control = Control_L
