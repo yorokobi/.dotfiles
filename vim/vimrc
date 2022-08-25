@@ -59,17 +59,17 @@ set statusline=%<%n:%f%h%m%r%=%{&ff}\ %l,%c%V\ %P
 " Only do this for Vim version 5.0 and later.
 if version >= 500
 
-    set notitle
+    "set notitle
 
-    set expandtab
-    set softtabstop=4
-    set shiftwidth=4
+    set softtabstop=2
+    set shiftwidth=2
     set smartcase
     set number
     set noequalalways
     "set smartindent
 "    set backspace=indent,start
     
+    set incsearch           " show where the command pattern matches
     set bs=2		        " allow backspacing over everything in insert mode
     set ai			        " always set autoindenting on
     set et					" Use spaces instead of tab when <TAB> is pressed
@@ -123,6 +123,17 @@ if version >= 500
 
     runtime macros/matchit.vim
 
+    " syntastic
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
+    let g:syntastic_error_symbol = '✗'
+
 endif
 
 " Map H to stop highlighting search matches
@@ -141,3 +152,62 @@ nmap <D-[> <<
 nmap <D-]> >>
 vmap <D-[> <gv
 vmap <D-]> >gv
+
+" Change date/time format for vim's bash-support plugin
+let g:BASH_FormatDate = '%F'
+let g:BASH_FormatTime = '%T %z'
+let g:BASH_FormatYear = '%Y'
+
+" Terraform
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+" Seeing is Believing (Ruby)
+" https://github.com/hwartig/vim-seeing-is-believing
+let g:xmpfilter_cmd = "seeing_is_believing"
+
+autocmd FileType ruby nmap <buffer> <F2> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby xmap <buffer> <F2> <Plug>(seeing_is_believing-clean)
+autocmd FileType ruby imap <buffer> <F2> <Plug>(seeing_is_believing-clean)
+
+autocmd FileType ruby nmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+autocmd FileType ruby xmap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+autocmd FileType ruby imap <buffer> <F3> <Plug>(seeing_is_believing-mark)
+
+" auto insert mark at appropriate spot.
+autocmd FileType ruby nmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby xmap <buffer> <F5> <Plug>(seeing_is_believing-run)
+autocmd FileType ruby imap <buffer> <F5> <Plug>(seeing_is_believing-run)
+
+" xmpfilter compatible
+autocmd FileType ruby nmap <buffer> <F6> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby xmap <buffer> <F6> <Plug>(seeing_is_believing-run_-x)
+autocmd FileType ruby imap <buffer> <F6> <Plug>(seeing_is_believing-run_-x)
+
+" NerdTree
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
