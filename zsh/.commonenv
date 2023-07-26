@@ -11,13 +11,14 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         fi
         export GREP_COLOR="1;4;32"                      # underlined bold green
         ### Colorize less
-        export LESS_TERMCAP_mb=$'[01;36m'             # bold cyan
-        export LESS_TERMCAP_md=$'[01;36m'             # bold cyan
-        export LESS_TERMCAP_me=$'[0m'                 # no color (m{b,d} end)
-        export LESS_TERMCAP_se=$'[0m'                 # no color
-        export LESS_TERMCAP_so=$'[01;44;33m'          # bold yellow on blue background (status bar)
-        export LESS_TERMCAP_ue=$'[0m'                 # no color (underline end)
-        export LESS_TERMCAP_us=$'[04;32m'             # underlined green (underline start)
+        export LESS_TERMCAP_mb=$'\E[01;36m'             # bold cyan
+        export LESS_TERMCAP_md=$'\E[01;36m'             # bold cyan
+        export LESS_TERMCAP_me=$'\E[0m'                 # no color (m{b,d} end)
+        export LESS_TERMCAP_se=$'\E[0m'                 # no color
+        export LESS_TERMCAP_so=$'\E[01;44;33m'          # bold yellow on blue background (status bar)
+        export LESS_TERMCAP_ue=$'\E[0m'                 # no color (underline end)
+        export LESS_TERMCAP_us=$'\E[04;32m'             # underlined green (underline start)
+        export GROFF_NO_SGR=1 # see grotty(1)
     fi
     if [ $colrs -gt 255 ] ; then
         if [[ -f $HOME/.dircolors256 ]] ; then
@@ -28,15 +29,16 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
             export TERM="screen-256color"
         fi
         ### 256 color theme
-        export LESS_TERMCAP_mb=$'[01;38;5;136m'
-        export LESS_TERMCAP_md=$'[01;38;5;61m'
-        export LESS_TERMCAP_me=$'[0m'
-        export LESS_TERMCAP_se=$'[0m'
-        export LESS_TERMCAP_so=$'[48;5;237m[01;38;5;136m'
-        export LESS_TERMCAP_ue=$'[0m'
-        export LESS_TERMCAP_us=$'[04;38;5;37m'
+        export LESS_TERMCAP_mb=$'\E[01;38;5;136m'
+        export LESS_TERMCAP_md=$'\E[01;38;5;61m'
+        export LESS_TERMCAP_me=$'\E[0m'
+        export LESS_TERMCAP_se=$'\E[0m'
+        export LESS_TERMCAP_so=$'\E[48;5;237m[01;38;5;136m'
+        export LESS_TERMCAP_ue=$'\E[0m'
+        export LESS_TERMCAP_us=$'\E[04;38;5;37m'
+        export GROFF_NO_SGR=1 # see grotty(1)
         ### 256 color grep highlight option
-        export GREP_COLOR="04;38;5;82"
+        export GREP_COLORS='mt=04;38;5;82'
         ### force 256 color support for tmux
         #alias tmux='/usr/bin/tmux -2 '
         alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -sh 60 +sb -sl 0'
@@ -56,9 +58,14 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
             export LSCOLORS="gxfxcxdxbxegedabagacad"
         fi
     else
-        alias ls="ls --color=auto -F"
-        alias ll="ls -l --time-style='+%F %T' -F"
-        alias grep='egrep --color=auto'
+        alias ls="ls --color=auto --time-style='posix-long-iso' -F"
+        alias ll="ls -l"
+        # lsd
+        #alias ls='lsd --color=auto --date +"%F %H:%M" -F'
+        #alias ll='ls -l'
+        alias grep='grep -E --color=auto'
+        alias egrep='grep -E --color=auto'
+        alias fgrep='grep -FE --color=auto'
     fi
 fi
 
@@ -67,10 +74,8 @@ alias ltr="ll -tr"
 alias la="ll -A"
 #alias l="ls -CF"
 
-alias srm='/usr/bin/wipe -f -Q6 '
-
-if [ -x /usr/bin/pacman-color ] ; then
-    alias pman='/usr/bin/pacman-color'
+if [ -x /usr/bin/wipe ] ; then
+  alias srm='/usr/bin/wipe -f -Q6 '
 fi
 
 ### Mutt aliases
@@ -79,14 +84,16 @@ fi
 alias mutt="cd $HOME/.mail && mutt -F $HOME/.mutt/muttrc && cd -"
 
 #if [ -z $DISPLAY ] ; then
-#    export PATH=$PATH:$HOME/Private/bin
+    #export PATH=$PATH:$HOME/Private/bin
 #fi
 #alias aoeu='setxkbmap -rules xfree86 -model pc105 -layout us -variant basic'
 #alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
+alias vpm='vim -p' # vim with tabs
 
 export EDITOR=vim
+export VISUAL=vim
 export PAGER=less
-export LESS='-FeRx4MX'
+export LESS='-FRx4MX'
 
 #eval `/usr/bin/ssh-agent`
 #SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
@@ -95,15 +102,11 @@ if [ -f /usr/lib/ssh/gnome-ssh-askpass2 ] ; then
 fi
 
 ### not all remote systems support more complex termcaps
-alias ssh='TERM=xterm-256color ssh '
+#alias ssh='TERM=xterm-256color ssh '
 
 ### make vim a pager like less|more|most
-#if [ -f /usr/share/vim/vim72/macros/less.sh ] ; then
-#    alias vless='/usr/share/vim/vim72/macros/less.sh '
-#fi
-### for vim 7.3
-#if [ -f /usr/share/vim/vim73/macros/less.sh ] ; then
-#    alias vless='/usr/share/vim/vim73/macros/less.sh '
+#if [ -f /usr/share/vim/vim82/macros/less.sh ] ; then
+#    alias vless='/usr/share/vim/vim82/macros/less.sh '
 #fi
 
 ### quickly encrypt files with my GPG key
