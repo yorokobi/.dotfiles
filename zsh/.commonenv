@@ -57,7 +57,7 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         fi
     else
         alias ls="ls --color=auto -F"
-        alias ll="ls -l --time-style='+%c' -F"
+        alias ll="ls -l --time-style='+%F %T' -F"
         alias grep='egrep --color=auto'
     fi
 fi
