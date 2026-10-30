@@ -1,0 +1,20 @@
+session_name "NAME HERE"
+layout {
+  // global cwd
+  cwd "~"
+  // Any new tab will look like this:
+  default_tab_template {
+    pane { // status bar
+      size 1
+      borderless true
+      plugin location="zellij:status-bar"
+    } // plugin status bar
+    children
+    pane size=1 borderless=true {
+        plugin location="zjstatus"
+    }
+  } // default_tab_template
+  tab {
+      pane
+  }
+} // layout

@@ -1,0 +1,63 @@
+session_name "Puppet Core 8"
+layout {
+  // global cwd
+  cwd "~/Documents/Personal/Puppet/libvirt/pc8"
+  // Any new tab will look like this:
+  default_tab_template {
+    pane { // status bar with one line at the top
+      size 1
+      borderless true
+      plugin location="zellij:status-bar"
+    } // plugin status bar
+    children
+    pane { // zjstatus bar on one line at the bottom
+      size 1
+      borderless true
+      plugin location="zjstatus"
+    }
+  } // default tab template
+  tab name="Git" {
+    pane name="Git" {
+      cwd "~/Documents/Personal/Puppet/libvirt/pc8/vcs"
+    }
+  } // Git tab
+  tab split_direction="horizontal" focus=true name="Puppet" {
+    pane {
+      name "Puppet"
+      focus true
+      command "ssh"
+      args "ps.osp8"
+      start_suspended true
+      close_on_exit true
+    }
+    pane {
+      name "Puppet DB"
+      command "ssh"
+      args "pdb.osp8"
+      start_suspended true
+      close_on_exit true
+    }
+  } // Puppet & Puppet DB tab
+  tab name="Nodes" {
+    pane stacked=true {
+      pane name="RHEL8-A1" {
+        command "ssh"
+        args "rhel8-a1.osp8"
+        start_suspended true
+        close_on_exit true
+      }
+      pane name="RHEL9-A1" {
+        command "ssh"
+        args "rhel9-a1.osp8"
+        start_suspended true
+        close_on_exit true
+      }
+      pane name="RHEL10-A1" {
+        command "ssh"
+        args "rhel10-a1.osp8"
+        start_suspended true
+        close_on_exit true
+      }
+    }
+  } // Nodes tab
+} // layout

@@ -1,0 +1,39 @@
+session_name "NAME HERE"
+layout {
+  // global cwd
+  cwd "~"
+  // Any new tab will look like this:
+  default_tab_template {
+    pane { // status bar
+      size 1
+      borderless true
+      plugin location="zellij:status-bar"
+    } // plugin status bar
+    children
+    pane size=1 borderless=true {
+        plugin location="zjstatus"
+    }
+  } // default_tab_template
+  tab name="Music" {
+    pane {
+      name "ncmpcpp"
+      command "ncmpcpp"
+      close_on_exit true
+    }
+  }
+  tab name="Splunk" {
+    pane {
+      name "Splunk"
+      command "sudo"
+      args "-iu" "splunk"
+      close_on_exit true
+    }
+  }
+  tab name="zsh" focus=true {
+    pane stacked=true {
+      pane focus=true
+      pane
+      pane
+    }
+  }
+} // layout
