@@ -37,9 +37,6 @@ if [ "$TERM" != "dumb" -a "$TERM" != "linux" ]; then    # no color for dumb or l
         export LESS_TERMCAP_us=$'[04;38;5;37m'
         ### 256 color grep highlight option
         export GREP_COLOR="04;38;5;82"
-        ### force 256 color support for tmux
-        #alias tmux='/usr/bin/tmux -2 '
-        alias uurxvt='urxvtc -tr -tint grey -fg white -bg black -fn "xft:Bitstream Vera Sans Mono:pixelsize=12" -sh 60 +sb -sl 0'
     fi
     unset colrs
     if [ "`uname`" = "Darwin" ]; then # are we on a Mac terminal?
@@ -65,70 +62,18 @@ fi
 ### some more ls aliases
 alias ltr="ll -tr"
 alias la="ll -A"
-#alias l="ls -CF"
-
-alias srm='/usr/bin/wipe -f -Q6 '
-
-if [ -x /usr/bin/pacman-color ] ; then
-    alias pman='/usr/bin/pacman-color'
-fi
 
 ### Mutt aliases
-#alias muttl="mutt -F $HOME/.mutt/.muttrc-local"
-#alias mutti="mutt -F $HOME/.mutt/.muttrc-imap"
+# alias muttl="mutt -F $HOME/.mutt/.muttrc-local"
+# alias mutti="mutt -F $HOME/.mutt/.muttrc-imap"
 alias mutt="cd $HOME/.mail && mutt -F $HOME/.mutt/muttrc && cd -"
-
-#if [ -z $DISPLAY ] ; then
-#    export PATH=$PATH:$HOME/Private/bin:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin:/Users/cwilliams/Library/Python/3.7/bin
-#fi
-#alias aoeu='setxkbmap -rules xfree86 -model pc105 -layout us -variant basic'
-#alias asdf='setxkbmap -rules xfree86 -model pc105 -layout dvorak -variant basic'
 
 export EDITOR=vim
 export PAGER=less
 export LESS='-FeRx4MX'
 
-#eval `/usr/bin/ssh-agent`
-#SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
-if [ -f /usr/lib/ssh/gnome-ssh-askpass2 ] ; then
-    export SSH_ASKPASS=/usr/lib/ssh/gnome-ssh-askpass2
-fi
-
 ### not all remote systems support more complex termcaps
-alias ssh='TERM=xterm-256color ssh '
-
-### make vim a pager like less|more|most
-#if [ -f /usr/share/vim/vim72/macros/less.sh ] ; then
-#    alias vless='/usr/share/vim/vim72/macros/less.sh '
-#fi
-### for vim 7.3
-#if [ -f /usr/share/vim/vim73/macros/less.sh ] ; then
-#    alias vless='/usr/share/vim/vim73/macros/less.sh '
-#fi
+# alias ssh='TERM=xterm-256color ssh '
 
 ### quickly encrypt files with my GPG key
 alias encrypt='gpg -r D074EA73 -e '
-
-### alias telnet
-if [ -e /usr/bin/ktelnet ] ; then
-    alias telnet='ktelnet '
-fi
-
-#### Disabled because rxvt-unicode behaves differently than other shells
-###+ and it doesn't seem to be required at this point
-### iBus
-#export GTK_IM_MODULE=ibus
-#export XMODIFIERS=@im=ibus
-#export QT_IM_MODULE=ibus
-
-### Keychain
-#/usr/bin/keychain -Q -q ~/.ssh/id_rsa
-#[[ -f $HOME/.keychain/$HOSTNAME-sh ]] && source $HOME/.keychain/$HOSTNAME-sh
-
-### SCIM and iBus
-#export XMODIFIERS=@im=SCIM
-#export GTK_IM_MODULE="ibus"
-#export QT_IM_MODULE="ibus"
-
-### Python Docs
-export PYTHONDOCS=/usr/share/doc/python/html/
